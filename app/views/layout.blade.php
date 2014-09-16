@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -15,72 +14,7 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk">
 </script>
 
-
-<script type="text/javascript">
-
-function initialize() {
-  var mapOptions = {
-    zoom: 10,
-    center: new google.maps.LatLng(35, -120)
-  }
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-                                mapOptions);
-
-  setMarkers(map, beaches);
-
-    google.maps.event.addListener(marker, 'click', function() {
-    map.setZoom(8);
-    map.setCenter(marker.getPosition());
-  });
-}
-
-/**
- * Data for the markers consisting of a name, a LatLng and a zIndex for
- * the order in which these markers should display on top of each
- * other.
- */
-var beaches = <?php echo $addresses ?>
-
-function setMarkers(map, locations) {
-
- var infowindow = new google.maps.InfoWindow();
-
-  for (var i = 0; i < locations.length; i++) {
-    var beach = locations[i];
-    var myLatLng = new google.maps.LatLng(beach['lat'], beach['lng']);
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: beach[0],
-        zIndex: beach[3]
-    });
-    marker.address=beach['address'];
-
-    //shows data when clicked
-    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(
-          	locations[i]['address']+
-          	'<br>'+
-          	' Flow Rate: '+
-          	locations[i]['flow_rate']+' gallons/min'+
-          	'<br>'+
-          	'Depth: '+
-          	locations[i]['depth']+' ft'+
-          	'<br>'
-
-          	);
-          infowindow.open(map, marker);
-          map.setCenter(marker.getPosition());
-        }
-      })(marker, i));
-
-  }
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-  </head>
+</head>
 <body>
 <nav class="navbar navbar-fixed-top" role="navigation">
   <div class="container-fluid">
@@ -92,7 +26,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Well Basically</a>
+      <a class="navbar-brand" href="{{ action('HomeController@index') }}">Well Basically</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -113,6 +47,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div id="map-canvas"></div>
- </body>
+
+@yield('content')
+
+</body>
 </html>

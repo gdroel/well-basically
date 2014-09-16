@@ -1,0 +1,30 @@
+html, body, #map-canvas { 
+
+	height: 100%;
+	margin: 0; 
+	padding: 0; 
+}
+
+
+
+ #map-canvas {
+
+ 	margin-top: 70px;
+
+ }
+
+.btn-info{
+
+ 	background-color: none;
+ }
+
+.navbar-fixed-top{
+
+	padding: 10px;
+	background-color: white;
+}
+
+.movedown{
+
+	margin-top: 100px;
+}

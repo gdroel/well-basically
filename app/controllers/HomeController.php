@@ -41,7 +41,11 @@ class HomeController extends BaseController {
 		$address->address = $results[0]['formatted_address'];
 		$address->lng = $results[0]['geometry']['location']['lng'];
 		$address->lat = $results[0]['geometry']['location']['lat'];
+		$address->depth = Input::get('depth');
+		$address->flow_rate = Input::get('flow_rate');
 		$address->save();
+
+		return Redirect::to('/');
 
 	}
 
