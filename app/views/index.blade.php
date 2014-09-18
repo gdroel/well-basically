@@ -74,22 +74,30 @@ function setMarkers(map, locations) {
           map.setCenter(marker.getPosition());
         }
       })(marker, i));
+}
 
-     google.maps.event.addListener(map, 'bounds_changed', function() {
+google.maps.event.addListener(map, 'bounds_changed', function() {
 
-        if (map.getBounds().contains(myLatLng) ){
+    var text = document.getElementById('text');
+    text.innerHTML = '';
 
-        text = well['address'];
-        document.getElementById("text").innerHTML = text;
+    
+    for(var i = 0; i<locations.length; i++){
+
+        var well = locations[i];
+        var LatLng = new google.maps.LatLng(well['lat'], well['lng']);
+
+        if (map.getBounds().contains(LatLng) ){
+
+        text.innerHTML += well['address']+'<br>';
         
         } else {
         
-        document.getElementById("text").innerHTML += text;
         text = '';
         }
+    }
       
     });
-}
 
   
 }
