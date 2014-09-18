@@ -16,46 +16,46 @@
 </script>
 
 
-<script type="text/javascript">
 
+<script type="text/javascript">
+var map = null;
+var wells = <?php echo $addresses ?>;
 function initialize() {
   var mapOptions = {
     zoom: 10,
-    center: new google.maps.LatLng(35, -120)
+    center: new google.maps.LatLng(35, -121)
   }
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-                                mapOptions);
 
-  setMarkers(map, beaches);
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+                              mapOptions);
+
+  setMarkers(map, wells);
 
     google.maps.event.addListener(marker, 'click', function() {
     map.setZoom(8);
     map.setCenter(marker.getPosition());
   });
+
 }
 
-/**
- * Data for the markers consisting of a name, a LatLng and a zIndex for
- * the order in which these markers should display on top of each
- * other.
- */
-var beaches = <?php echo $addresses ?>
+
 
 function setMarkers(map, locations) {
 
  var infowindow = new google.maps.InfoWindow();
-
+ var text = '';
   for (var i = 0; i < locations.length; i++) {
-    var beach = locations[i];
-    var myLatLng = new google.maps.LatLng(beach['lat'], beach['lng']);
+    var well = locations[i];
+    var myLatLng = new google.maps.LatLng(well['lat'], well['lng']);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: beach[0],
-        zIndex: beach[3]
+        title: well[0],
+        zIndex: well[3]
     });
-    marker.address=beach['address'];
 
+
+    
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -75,8 +75,26 @@ function setMarkers(map, locations) {
         }
       })(marker, i));
 
-  }
+     google.maps.event.addListener(map, 'bounds_changed', function() {
+
+        if (map.getBounds().contains(myLatLng) ){
+
+        text = well['address'];
+        document.getElementById("text").innerHTML = text;
+        
+        } else {
+        
+        document.getElementById("text").innerHTML += text;
+        text = '';
+        }
+      
+    });
 }
+
+  
+}
+
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -113,6 +131,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="col-md-9" id="i">
 <div id="map-canvas"></div>
+</div>
+
+<div class="col-md-3 movedownless">
+  <h2>Wells Nearby</h2>
+  <div id="text">
+  </div>
+</div>
  </body>
 </html>
