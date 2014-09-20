@@ -11,6 +11,17 @@ p,a{
 	font-size: 16px;
 }
 
+li{
+
+	cursor: pointer;
+	list-style: none;
+}
+
+li:hover{
+
+	background-color: blue;
+}
+
 h1{
 
 	font-family: 'Lato';

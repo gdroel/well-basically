@@ -53,17 +53,53 @@ function initialize() {
 
 function setMarkers(map, locations) {
 
+google.maps.event.addListener(map,'bounds_changed',function(){
+
+  ul = document.getElementById('marker_list');
+  ul.innerHTML = '';
+
+});
  var infowindow = new google.maps.InfoWindow();
  var text = '';
+ var marker = null;
+
   for (var i = 0; i < locations.length; i++) {
+
     var well = locations[i];
     var myLatLng = new google.maps.LatLng(well['lat'], well['lng']);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: well[0],
+        title: well['address'],
         zIndex: well[3]
     });
+
+  google.maps.event.addListener(map, 'bounds_changed', (function(marker){
+
+    var ul = document.getElementById("marker_list");
+    ul.innerHTML = '';
+    return function(){
+
+      if(map.getBounds().contains(marker.getPosition())){
+
+        var li = document.createElement("li");
+        var title = marker.getTitle();
+        li.innerHTML = title;
+        ul.appendChild(li);
+        
+        //Trigger a click event to marker when the button is clicked.
+        google.maps.event.addDomListener(li, "click", function(){
+          google.maps.event.trigger(marker, "click");
+        });
+      }
+
+      else{
+
+        ul.innerHTML = '';
+      }
+
+    }
+    })(marker));
 
 
     
@@ -87,37 +123,13 @@ function setMarkers(map, locations) {
       })(marker, i));
 }
 
-google.maps.event.addListener(map, 'bounds_changed', function() {
-
-    var text = document.getElementById('text');
-    text.innerHTML = '';
+for(var i=0;i < locations.length; i++){
 
 
-    for(var i = 0; i<locations.length; i++){
-
-        var well = locations[i];
-        var LatLng = new google.maps.LatLng(well['lat'], well['lng']);
-
-        if (map.getBounds().contains(LatLng) ){
-
-        text.innerHTML += "<tr><td onClick=\"center(" + well['lng'] + ',' + well['lat'] + ")\">" + well['address'] + '</tr></td>';
-        
-        } else {
-        
-        text.innerHTML = '';
-        }
-    }
-      
-    });
-
-  
 }
 
-function center(lat,lng){
-
-  var centerLatLng = new google.maps.LatLng(lat,lng);
-  map.setCenter(centerLatLng);
 }
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -159,6 +171,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div class="col-md-3 movedown75">
   <table class="table" id="text">
   </table>
+  <ul id="marker_list">
+
+  </ul>
 </div>
  </body>
 </html>
