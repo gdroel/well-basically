@@ -25,8 +25,8 @@
         Feet
     </span>
  </div>
-
-{{ Form::submit() }}
+<br>
+{{ Form::submit('Add Well',array('class'=>'btn btn-info')) }}
 {{ Form::close() }}
 </div>
 </div>

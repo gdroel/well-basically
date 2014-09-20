@@ -8,6 +8,7 @@
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/style.css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -16,9 +17,9 @@
 </script>
 
 
-
 <script type="text/javascript">
 var map = null;
+var gmarkers = [];
 var wells = <?php echo $addresses ?>;
 function initialize() {
   var mapOptions = {
@@ -31,11 +32,21 @@ function initialize() {
 
   setMarkers(map, wells);
 
-    google.maps.event.addListener(marker, 'click', function() {
+  google.maps.event.addListener(marker, 'click', function() {
     map.setZoom(8);
     map.setCenter(marker.getPosition());
   });
 
+  var td = document.getElementById("click");
+  google.maps.event.addListener(td,'click',function(){
+
+    var lat = td.getAttribute('data-lat');
+    var lng = td.getAttribute('data-lng');
+
+    var centerLatLng = new google.maps.LatLng(lat,lng);
+    map.setCenter(centerLatLng);
+
+  });
 }
 
 
@@ -81,7 +92,7 @@ google.maps.event.addListener(map, 'bounds_changed', function() {
     var text = document.getElementById('text');
     text.innerHTML = '';
 
-    
+
     for(var i = 0; i<locations.length; i++){
 
         var well = locations[i];
@@ -89,11 +100,11 @@ google.maps.event.addListener(map, 'bounds_changed', function() {
 
         if (map.getBounds().contains(LatLng) ){
 
-        text.innerHTML += well['address']+'<br>';
+        text.innerHTML += "<tr><td onClick=\"center(" + well['lng'] + ',' + well['lat'] + ")\">" + well['address'] + '</tr></td>';
         
         } else {
         
-        text = '';
+        text.innerHTML = '';
         }
     }
       
@@ -102,7 +113,11 @@ google.maps.event.addListener(map, 'bounds_changed', function() {
   
 }
 
+function center(lat,lng){
 
+  var centerLatLng = new google.maps.LatLng(lat,lng);
+  map.setCenter(centerLatLng);
+}
 
 google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -124,8 +139,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -143,10 +156,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="map-canvas"></div>
 </div>
 
-<div class="col-md-3 movedownless">
-  <h2>Wells Nearby</h2>
-  <div id="text">
-  </div>
+<div class="col-md-3 movedown75">
+  <table class="table" id="text">
+  </table>
 </div>
  </body>
 </html>
