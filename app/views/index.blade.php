@@ -63,12 +63,9 @@ function setMarkers(map, locations) {
       gmarkers.push(marker);
       console.log(gmarkers);
 
-      side_bar_html.innerHTML += '<a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '<\/a><br>';
+      side_bar_html.innerHTML += '<a class=\'list-group-item\' href="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '<\/a>';
 
     }
-    else{
-
-          }
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -116,20 +113,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
-        <li><a href="{{ action('HomeController@showCreate') }}">Add a Well</a></li>
+        <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
         @else
         <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
-        <li><a href="{{ action('HomeController@showRegister') }}">Login</a></li>
+        <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
         @endif
-
+        <li><a><span class="glyphicon glyphicon-search"></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -139,8 +130,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </div>
 
 <div class="col-md-3 movedown75">
-<div id="text">
-</div>
+<ul class="list-group" id="text">
+</ul>
 </div>
  </body>
 </html>

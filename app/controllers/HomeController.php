@@ -24,7 +24,21 @@ class HomeController extends BaseController {
 
 	public function showCreate(){
 
-		return View::make('create');
+		if(Auth::check()){
+
+			if(Address::where('user_id',Auth::user()->id)->first()){
+
+			$well = Address::where('user_id',Auth::user()->id)->first();
+		}
+
+			else{
+
+			$well = null;
+
+			}
+
+		}
+		return View::make('create',compact('well'));
 	}
 
 	public function doCreate(){
@@ -47,6 +61,30 @@ class HomeController extends BaseController {
 		$address->save();
 
 		return Redirect::to('/');
+
+	}
+
+	public function doEdit(){
+
+		$well = Address::where('address',Input::get('address'))->first();
+
+		$address = Input::get('address');
+		$address = Str::slug($address,'+');
+
+		$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk');
+		$response = json_decode($response,true);
+		$results = $response['results'];
+
+		$well->address = $results[0]['formatted_address'];
+		$well->lng = $results[0]['geometry']['location']['lng'];
+		$well->lat = $results[0]['geometry']['location']['lat'];
+		$well->depth = Input::get('depth');
+		$well->flow_rate = Input::get('flow_rate');
+		$well->year_dug = Input::get('year_dug');
+		$well->user_id = Auth::user()->id;
+		$well->save();
+
+		return Redirect::action('HomeController@index');
 
 	}
 
@@ -88,5 +126,11 @@ class HomeController extends BaseController {
 		return Redirect::to('login');
 	}
 
-}
+	}
+
+	public function doLogout(){
+
+		Auth::logout();
+		return Redirect::action('HomeController@index');
+	}
 }

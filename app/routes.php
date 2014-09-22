@@ -21,3 +21,6 @@ Route::post('/register','HomeController@doRegister');
 
 Route::get('/login','HomeController@showLogin');
 Route::post('/login','HomeController@doLogin');
+
+Route::post('/edit','HomeController@doEdit');
+Route::get('/logout','HomeController@doLogout');
