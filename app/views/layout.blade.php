@@ -42,7 +42,13 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        @if(Auth::check())
         <li><a href="{{ action('HomeController@showCreate') }}">Add a Well</a></li>
+        @else
+        <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
+        <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
+        @endif
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

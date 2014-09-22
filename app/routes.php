@@ -15,3 +15,9 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/create','HomeController@showCreate');
 Route::post('/create','HomeController@doCreate');
+
+Route::get('/register','HomeController@showRegister');
+Route::post('/register','HomeController@doRegister');
+
+Route::get('/login','HomeController@showLogin');
+Route::post('/login','HomeController@doLogin');

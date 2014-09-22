@@ -19,7 +19,9 @@
 
 <script type="text/javascript">
 var map = null;
+var marker = null;
 var gmarkers = [];
+
 var wells = <?php echo $addresses ?>;
 function initialize() {
   var mapOptions = {
@@ -30,102 +32,64 @@ function initialize() {
   var map = new google.maps.Map(document.getElementById('map-canvas'),
                               mapOptions);
 
-  setMarkers(map, wells);
-
-  google.maps.event.addListener(marker, 'click', function() {
-    map.setZoom(8);
-    map.setCenter(marker.getPosition());
-  });
-
-  var td = document.getElementById("click");
-  google.maps.event.addListener(td,'click',function(){
-
-    var lat = td.getAttribute('data-lat');
-    var lng = td.getAttribute('data-lng');
-
-    var centerLatLng = new google.maps.LatLng(lat,lng);
-    map.setCenter(centerLatLng);
-
-  });
+  google.maps.event.addListener(map, 'bounds_changed', function(){setMarkers(map, wells)});
 }
 
 
+function myclick(i) {
+  google.maps.event.trigger(gmarkers[i], "click");
+}
+
 
 function setMarkers(map, locations) {
-
-google.maps.event.addListener(map,'bounds_changed',function(){
-
-  ul = document.getElementById('marker_list');
-  ul.innerHTML = '';
-
-});
- var infowindow = new google.maps.InfoWindow();
- var text = '';
- var marker = null;
-
+  var side_bar_html = '';
+  side_bar_html = document.getElementById('text');
+  side_bar_html.innerHTML = '';
+  var infowindow = new google.maps.InfoWindow();
+  
   for (var i = 0; i < locations.length; i++) {
 
     var well = locations[i];
+
     var myLatLng = new google.maps.LatLng(well['lat'], well['lng']);
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: well['address'],
-        zIndex: well[3]
+        title: well['address']
     });
 
-  google.maps.event.addListener(map, 'bounds_changed', (function(marker){
+    if(map.getBounds().contains(marker.getPosition()) ){
 
-    var ul = document.getElementById("marker_list");
-    ul.innerHTML = '';
-    return function(){
+      gmarkers.push(marker);
+      console.log(gmarkers);
 
-      if(map.getBounds().contains(marker.getPosition())){
-
-        var li = document.createElement("li");
-        var title = marker.getTitle();
-        li.innerHTML = title;
-        ul.appendChild(li);
-        
-        //Trigger a click event to marker when the button is clicked.
-        google.maps.event.addDomListener(li, "click", function(){
-          google.maps.event.trigger(marker, "click");
-        });
-      }
-
-      else{
-
-        ul.innerHTML = '';
-      }
+      side_bar_html.innerHTML += '<a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '<\/a><br>';
 
     }
-    })(marker));
+    else{
 
-
-    
+          }
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infowindow.setContent(
-          	locations[i]['address']+
+          	'<p>'+locations[i]['address']+
           	'<br>'+
           	' Flow Rate: '+
           	locations[i]['flow_rate']+' gallons/min'+
           	'<br>'+
           	'Depth: '+
           	locations[i]['depth']+' ft'+
-          	'<br>'
+          	'<br> Drilled in: '+
+            locations[i]['year_dug']+
+            '<br> Post Updated On: '+
+            locations[i]['updated_at']+'</p>'
 
           	);
           infowindow.open(map, marker);
           map.setCenter(marker.getPosition());
         }
       })(marker, i));
-}
-
-for(var i=0;i < locations.length; i++){
-
-
 }
 
 }
@@ -159,7 +123,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        @if(Auth::check())
         <li><a href="{{ action('HomeController@showCreate') }}">Add a Well</a></li>
+        @else
+        <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
+        <li><a href="{{ action('HomeController@showRegister') }}">Login</a></li>
+        @endif
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -169,11 +139,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </div>
 
 <div class="col-md-3 movedown75">
-  <table class="table" id="text">
-  </table>
-  <ul id="marker_list">
-
-  </ul>
+<div id="text">
+</div>
 </div>
  </body>
 </html>

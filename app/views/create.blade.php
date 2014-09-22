@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 <div class="col-md-4 col-md-offset-4 movedown">
-<h1>Add Your Well</h1>
+<h1>Add a Well</h1>
 {{ Form::open(array('action'=>'HomeController@doCreate')) }}
 
 {{ Form::label('address','Address')}}
@@ -26,6 +26,9 @@
     </span>
  </div>
 <br>
+
+{{ Form::label('year_dug','Year Drilled') }}
+{{ Form::text('year_dug',null,array('class'=>'form-control')) }}
 {{ Form::submit('Add Well',array('class'=>'btn btn-info')) }}
 {{ Form::close() }}
 </div>

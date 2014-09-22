@@ -8,7 +8,7 @@ html, body, #i, #map-canvas {
 p,a{
 
 	font-family: 'Lato', sans-serif;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 li{
@@ -19,7 +19,7 @@ li{
 
 li:hover{
 
-	background-color: blue;
+	background-color: #E8E8E8 ;
 }
 
 h1{
