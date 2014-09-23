@@ -68,9 +68,9 @@ td:hover{
 
 #pac-input{
 
-	margin-top: 8px;
 	z-index: 1;
 }
+
 
 .movedown{
 
@@ -106,7 +106,7 @@ td:hover{
 border-color: #4d90fe;
 margin-left: -1px;
 padding-left: 14px;  /* Regular padding-left + 1. */
-width: 401px;
+width: 201px;
 z-index: 100;
 }
 

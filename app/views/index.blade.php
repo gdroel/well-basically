@@ -11,7 +11,6 @@
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk">
 </script>
@@ -140,10 +139,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <div class="form-group">
-        <input id="pac-input" class="form-control controls" type="text" placeholder="Search Box">
-      </div>
       </ul>
+        <div class="navbar-form navbar-right">
+        <div class="form-group">
+          <input id="pac-input" class="form-control controls" type="text" placeholder="Search Box">
+        </div>
+      </div>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
         <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
@@ -151,18 +152,32 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
         <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
         @endif
-        <li><a><span class="glyphicon glyphicon-search"></span></a></li>
+        <li><a id="search"><span  class="glyphicon glyphicon-search"></span></a></li>
       </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <div class="col-md-9" id="i">
-<div id="map-canvas"></div>
+  <div id="map-canvas"></div>
 </div>
-
 <div class="col-md-3 movedown75">
 <ul class="list-group" id="text">
 </ul>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#pac-input").hide();
+  $("#search").click(function(){
+
+    $("#pac-input").toggle();
+  });
+
+});
+</script>
  </body>
 </html>
