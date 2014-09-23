@@ -1,20 +1,23 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-<style type="text/css">
-
-</style>
+<title>Well Basically | The Well Database</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+<!-- Latest compiled and minified JavaScript -->
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk">
 </script>
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 
-</head>
+
+  </head>
 <body>
 <nav class="navbar navbar-fixed-top" role="navigation">
   <div class="container-fluid">
@@ -32,29 +35,43 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+        <div class="navbar-form navbar-right">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input id="pac-input" class="form-control search controls" type="text" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      </div>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
-        <li><a href="{{ action('HomeController@showCreate') }}">Add a Well</a></li>
+        <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
         @else
         <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
         <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
         @endif
-
+        <li><a id="search"><span  class="glyphicon glyphicon-search"></span></a></li>
       </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 @yield('content')
 
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $("#pac-input").hide();
+  $("#search").click(function(){
+
+  $("#pac-input").toggle();
+  $("#search").css({'margin-right':'0'});
+  });
+
+});
+</script>
 </body>
 </html>

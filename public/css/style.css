@@ -18,6 +18,14 @@ html, body, #i, #map-canvas {
 	font-size: 30px;
 }
 
+.list-group-item{
+
+
+  -webkit-border-radius: 0 !important ;
+     -moz-border-radius: 0 !important ;
+          border-radius: 0 !important ;
+}
+
 
 .navbar .nav > li > a, .navbar .nav > li > a{
 
@@ -93,9 +101,9 @@ td:hover{
 	margin-top: 100px;
 }
 
-.movedown75{
+.movedown70{
 
-	margin-top: 75px;
+	margin-top: 70px;
 }
 
 .movedownless{
@@ -142,4 +150,9 @@ td:hover{
 	background-color: #428bca;
 	color:white;
 	margin-right: -40px;
+}
+
+.search{
+	margin-top: -8px;
+	height: 55px;
 }

@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html>
+@extends('layout')
 
-<head>
-<style type="text/css">
-
-</style>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/style.css">
-<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
-<!-- Latest compiled and minified JavaScript -->
-<script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk">
-</script>
- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-
+@section('content')
 <script type="text/javascript">
 var map = null;
 var marker = null;
@@ -93,26 +76,26 @@ function setMarkers(map, locations) {
 
       gmarkers.push(marker);
 
-      side_bar_html.innerHTML += '<a class=\'list-group-item\' href="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '<\/a>';
+      side_bar_html.innerHTML += '<li class=\'list-group-item\' onClick="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '</li>';
 
     }
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infowindow.setContent(
-          	'<p>'+locations[i]['address']+
-          	'<br>'+
-          	' Flow Rate: '+
-          	locations[i]['flow_rate']+' gallons/min'+
-          	'<br>'+
-          	'Depth: '+
-          	locations[i]['depth']+' ft'+
-          	'<br> Drilled in: '+
+            '<p>'+locations[i]['address']+
+            '<br>'+
+            ' Flow Rate: '+
+            locations[i]['flow_rate']+' gallons/min'+
+            '<br>'+
+            'Depth: '+
+            locations[i]['depth']+' ft'+
+            '<br> Drilled in: '+
             locations[i]['year_dug']+
             '<br> Post Updated On: '+
             locations[i]['updated_at']+'</p>'
 
-          	);
+            );
           infowindow.open(map, marker);
           map.setCenter(marker.getPosition());
         }
@@ -123,65 +106,13 @@ function setMarkers(map, locations) {
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-  </head>
-<body>
-<nav class="navbar navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Well Basically</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-        <div class="navbar-form navbar-right">
-        <div class="form-group">
-          <input id="pac-input" class="form-control controls" type="text" placeholder="Search Box">
-        </div>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-        @if(Auth::check())
-        <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
-        @else
-        <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
-        <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
-        @endif
-        <li><a id="search"><span  class="glyphicon glyphicon-search"></span></a></li>
-      </ul>
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+</script>
 <div class="col-md-9" id="i">
   <div id="map-canvas"></div>
 </div>
-<div class="col-md-3 movedown75">
+<div class="col-md-3 movedown70">
 <ul class="list-group" id="text">
 </ul>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-
-  $("#pac-input").hide();
-  $("#search").click(function(){
-
-    $("#pac-input").show();
- $("#search").css({'margin-right':'0'});
-  });
-
-});
-</script>
- </body>
-</html>
+@stop
