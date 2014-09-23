@@ -4,7 +4,6 @@
 <div class="container">
 <div class="col-md-6 col-md-offset-3 movedown">
 <h1>My Well</h1>
-<p>Check out your well stats here.</p>
 
 @if(!isset($well))
 {{ Form::open(array('action'=>'HomeController@doCreate')) }}

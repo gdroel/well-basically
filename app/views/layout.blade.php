@@ -36,19 +36,25 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       </ul>
+        @if(Request::is('/'))
         <div class="navbar-form navbar-right">
         <div class="form-group">
           <input id="pac-input" class="form-control search controls" type="text" placeholder="Search">
         </div>
-      </div>
+        </div>
+        @endif
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
-        <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
+          @if(Request::is('/'))
+          <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
+          @endif
         @else
         <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
         <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
         @endif
+        @if(Request::is('/'))
         <li><a id="search"><span  class="glyphicon glyphicon-search"></span></a></li>
+        @endif
       </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -68,7 +74,6 @@ $(document).ready(function(){
   $("#search").click(function(){
 
   $("#pac-input").toggle();
-  $("#search").css({'margin-right':'0'});
   });
 
 });
