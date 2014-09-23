@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
 <!-- Latest compiled and minified JavaScript -->
 <script type="text/javascript"
@@ -53,9 +55,11 @@ var placesArray = [];
         placesArray.push(marker);
 
         bounds.extend(place.geometry.location);
+        
       }
 
       map.fitBounds(bounds);
+      map.setZoom(8);
     });
 
   google.maps.event.addListener(map, 'bounds_changed', function(){setMarkers(map, wells)});
@@ -88,7 +92,6 @@ function setMarkers(map, locations) {
     if(map.getBounds().contains(marker.getPosition()) ){
 
       gmarkers.push(marker);
-      console.log(gmarkers);
 
       side_bar_html.innerHTML += '<a class=\'list-group-item\' href="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '<\/a>';
 
@@ -165,7 +168,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <ul class="list-group" id="text">
 </ul>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -174,7 +177,8 @@ $(document).ready(function(){
   $("#pac-input").hide();
   $("#search").click(function(){
 
-    $("#pac-input").toggle();
+    $("#pac-input").show();
+ $("#search").css({'margin-right':'0'});
   });
 
 });
