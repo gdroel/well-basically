@@ -5,6 +5,16 @@ html, body, #i, #map-canvas {
 	padding: 0; 
 }
 
+#map-canvas {
+    display:block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:50px; /* Set margin to your navbar height */
+}
 p,a{
 
 	font-family: 'Lato', sans-serif;
@@ -53,7 +63,13 @@ td:hover{
 .navbar-fixed-top{
 
 	padding: 10px;
-	background-color: white;
+	background-color: none;
+}
+
+#pac-input{
+
+	margin-top: 8px;
+	z-index: 1;
 }
 
 .movedown{
@@ -69,4 +85,32 @@ td:hover{
 .movedownless{
 
 	margin-top: 50px;
+}
+
+#type-selector {
+	margin-top: -10px;
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
+	z-index: 100;
+}
+
+#type-selector label {
+	font-family: 'Lato';
+	font-size: 13px;
+	font-weight: 300;
+	z-index: 100;
+}
+
+#pac-input:focus {
+border-color: #4d90fe;
+margin-left: -1px;
+padding-left: 14px;  /* Regular padding-left + 1. */
+width: 401px;
+z-index: 100;
+}
+
+.pac-container {
+font-family: Roboto;
+z-index: 100;
 }

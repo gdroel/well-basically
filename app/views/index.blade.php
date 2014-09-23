@@ -140,7 +140,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+      <div class="form-group">
+        <input id="pac-input" class="form-control controls" type="text" placeholder="Search Box">
+      </div>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
