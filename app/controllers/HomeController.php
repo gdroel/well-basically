@@ -16,10 +16,25 @@ class HomeController extends BaseController {
 	*/
 	public function index(){
 
+		if(Auth::check()){
+
+			if(Address::where('user_id',Auth::user()->id)->first()){
+
+			$well = Address::where('user_id',Auth::user()->id)->first();
+		}
+
+			else{
+
+			$well = null;
+
+			}
+
+		}
+
 		$addresses = Address::all();
 		$addresses = json_encode($addresses);
 
-		return View::make('index',compact('addresses'));
+		return View::make('index',compact('addresses','well'));
 	}
 
 	public function showCreate(){

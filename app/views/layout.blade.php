@@ -46,11 +46,13 @@
       <ul class="nav navbar-nav navbar-right">
         @if(Auth::check())
           @if(Request::is('/'))
-          <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
+          <!-- <li><a id="mywell" href="{{ action('HomeController@showCreate') }}">My Well</a></li> -->
+          <li><a data-toggle="modal" data-target="#wellModal">My Well</a></li>
+          <li><a href="{{ action('HomeController@doLogout') }}">Logout</a></li>
           @endif
         @else
-        <li><a href="{{ action('HomeController@showLogin') }}">Login</a></li>
-        <li><a href="{{ action('HomeController@showRegister') }}">Register</a></li>
+        <li><a data-toggle="modal" data-target="#loginModal">Login</a></li>
+        <li><a data-toggle="modal" data-target="#registerModal">Register</a></li>
         @endif
         @if(Request::is('/'))
         <li><a id="search"><span  class="glyphicon glyphicon-search"></span></a></li>

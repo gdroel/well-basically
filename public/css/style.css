@@ -12,6 +12,64 @@ html, body, #i, #map-canvas {
 
 }
 
+p{
+
+	font-family: 'Lato';
+}
+
+#x,#loginx{
+
+	cursor: pointer;
+}
+
+.popup{
+
+  height: 500px;
+  
+  background-color: white;
+  width: 600px;
+ 
+
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+}
+hr{
+
+	line-height: 50%;
+}
+#login,.popup{
+
+
+	z-index: 1;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+
+}
+#login{
+
+  height: 300px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index: 1;
+  background-color: white;
+  width: 350px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+}
+
 .navbar-brand{
 
 	font-family: 'Lobster';
@@ -68,7 +126,8 @@ li:hover{
 h1{
 
 	font-family: 'Nobile', sans-serif;
-	font-weight: 700;
+	line-height: 50%
+	
 }
 
 
@@ -126,7 +185,9 @@ td:hover{
 	z-index: 100;
 }
 
-
+.navbar-fixed-top .navbar-toggle .icon-bar {
+    background-color: gray;
+}
 
 .pac-container {
 	z-index: 100;

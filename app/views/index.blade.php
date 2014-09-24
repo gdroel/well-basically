@@ -79,6 +79,7 @@ function setMarkers(map, locations) {
       side_bar_html.innerHTML += '<li class=\'list-group-item\' onClick="javascript:myclick(' + (gmarkers.length-1) + ')">' + well['address'] + '</li>';
 
     }
+
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -93,7 +94,7 @@ function setMarkers(map, locations) {
             '<br> Drilled in: '+
             locations[i]['year_dug']+
             '<br> Post Updated On: '+
-            locations[i]['updated_at']+'</p>'
+            well['update_at']+'</p>'
 
             );
           infowindow.open(map, marker);
@@ -107,6 +108,126 @@ function setMarkers(map, locations) {
 
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+<div class="modal fade" id="wellModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">My Well</h4>
+      </div>
+      <div class="modal-body">
+      @if(!isset($well))
+      {{ Form::open(array('action'=>'HomeController@doCreate')) }}
+      @else
+      {{ Form::open(array('action'=>'HomeController@doEdit')) }}
+      @endif
+
+      {{ Form::label('address','Address') }}
+
+      @if(isset($well))
+      {{ Form::text('address',$well->address, array('class'=>'form-control')) }}
+      @else
+      {{ Form::text('address',null, array('class'=>'form-control')) }}
+      @endif
+      <br>
+      {{ Form::label('flow_rate','Flow Rate')}}
+      <div class="input-group">
+      @if(isset($well))
+      {{ Form::text('flow_rate',$well->flow_rate, array('class'=>'form-control')) }}
+      @else
+      {{ Form::text('flow_rate',null, array('class'=>'form-control')) }}
+      @endif
+          <span class="input-group-addon">
+              Gallons/Min
+          </span>
+       </div>
+      <br>
+
+      {{ Form::label('depth','Depth')}}
+      <div class="input-group">
+      @if(isset($well))
+      {{ Form::text('depth',$well->depth, array('class'=>'form-control')) }}
+      @else
+      {{ Form::text('depth',null, array('class'=>'form-control')) }}
+      @endif
+          <span class="input-group-addon">
+              Feet
+          </span>
+       </div>
+      <br>
+
+      {{ Form::label('year_dug','Year Drilled') }}
+      @if(isset($well))
+      {{ Form::text('year_dug',$well->year_dug ,array('class'=>'form-control')) }}
+      @else
+      {{ Form::text('year_dug',null ,array('class'=>'form-control')) }}
+      @endif
+      <br>
+      </div>
+      <div class="modal-footer">
+      @if(!isset($well))
+      {{ Form::submit('Add Well',array('class'=>'btn btn-info')) }}
+      @else
+      {{ Form::submit('Edit Your Well',array('class'=>'btn btn-info')) }}
+      @endif
+
+      {{ Form::close() }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Login</h4>
+      </div>
+      <div class="modal-body">
+      {{ Form::open(array('action'=>'HomeController@doLogin'))}}
+      <br>
+      {{ Form::label('email','Enter your Email Address')}}
+      {{ Form::text('email',null,array('class'=>'form-control')) }}
+      <br>
+      {{ Form::label('password','Enter your password')}}
+      {{ Form::password('password',array('class'=>'form-control')) }}
+      <br>
+
+      </div>
+      <div class="modal-footer">
+      {{ Form::submit('Login',array('class'=>'btn btn-info')) }}
+      {{ Form::close() }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Register</h4>
+      </div>
+      <div class="modal-body">
+      {{ Form::open(array('action'=>'HomeController@doRegister'))}}
+      <br>
+      {{ Form::label('email','Enter your Email Address')}}
+      {{ Form::text('email',null,array('class'=>'form-control')) }}
+      <br>
+      {{ Form::label('username','Choose a Username')}}
+      {{ Form::text('username',null,array('class'=>'form-control')) }}
+      <br>
+      {{ Form::label('password','Choose a password')}}
+      {{ Form::password('password',array('class'=>'form-control')) }}
+      <br>
+      </div>
+      <div class="modal-footer">
+      {{ Form::submit('Register',array('class'=>'btn btn-info')) }}
+      {{ Form::close() }}
+      </div>
+    </div>
+  </div>
+</div>
 <div class="col-md-9" id="i">
   <div id="map-canvas"></div>
 </div>
@@ -114,5 +235,38 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <ul class="list-group" id="text">
 </ul>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
 
+  $(".popup").hide();
+  $("#login").hide();
+  $("#mywell").click(function(){
+
+  $(".popup").fadeIn();
+  });
+
+
+  $("#x").click(function(){
+
+    $(".popup").hide();
+    $("#login").hide();
+  });
+
+
+  $("#loginx").click(function(){
+
+    
+    $("#login").hide();
+  });
+
+  $("#loginbutton").click(function(){
+
+    $("#login").slideDown('slow');
+
+  });
+
+});
+
+
+</script>
 @stop
