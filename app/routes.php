@@ -24,3 +24,5 @@ Route::post('/login','HomeController@doLogin');
 
 Route::post('/edit','HomeController@doEdit');
 Route::get('/logout','HomeController@doLogout');
+
+Route::get('/confirm/{confirmation_code}','HomeController@confirm');

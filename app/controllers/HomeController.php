@@ -110,16 +110,46 @@ class HomeController extends BaseController {
 
 	public function doRegister(){
 
-		$user = new User();
+        /*$rules = [
+            'username' => 'required|min:6|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6'
+        ];
 
-		$user->username = Input::get('username');
-		$user->email = Input::get('email');
-		$user->password = Hash::make(Input::get('password'));
+        $input = Input::only(
+            'username',
+            'email',
+            'password',
+            'password_confirmation'
+        );
 
-		$user->save();
+        $validator = Validator::make($input, $rules);
 
-		return Redirect::to('/');
-	}
+        if($validator->fails())
+        {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        */
+
+        $confirmation_code = str_random(30);
+
+       	$user = new User();
+
+        $user->username = Input::get('username');
+        $user->email = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+        $user->confirmation_code = $confirmation_code;
+        
+        $user->save();
+
+        Mail::send('emails.verify', compact('confirmation_code'), function($message) {
+
+            $message->to(Input::get('email'), Input::get('username'))
+                ->subject('Verify your email address');
+        });
+
+        return Redirect::action('HomeController@index');
+    }
 
 	public function showLogin(){
 
@@ -132,7 +162,13 @@ class HomeController extends BaseController {
 	$email = Input::get('email');
 	$password = Input::get('password');
 
-	if (Auth::attempt(array('email' => $email, 'password' => $password)))
+        $credentials = [
+            'username' => Input::get('username'),
+            'password' => Input::get('password'),
+            'confirmed' => 1
+        ];
+
+	if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)))
 		{
 		    return Redirect::to('/');
 		}
@@ -148,4 +184,16 @@ class HomeController extends BaseController {
 		Auth::logout();
 		return Redirect::action('HomeController@index');
 	}
+
+    public function confirm($confirmation_code)
+    {
+
+        $user = User::where('confirmation_code',$confirmation_code)->first();
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+        return Redirect::action('HomeController@index');
+    }
 }

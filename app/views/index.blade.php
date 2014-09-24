@@ -42,7 +42,7 @@ var placesArray = [];
       }
 
       map.fitBounds(bounds);
-      map.setZoom(8);
+      map.setZoom(15);
     });
 
   google.maps.event.addListener(map, 'bounds_changed', function(){setMarkers(map, wells)});
@@ -80,6 +80,11 @@ function setMarkers(map, locations) {
 
     }
 
+    google.maps.event.addListener(map,'click',function(){
+
+      infowindow.close();
+    });
+
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -113,7 +118,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">My Well</h4>
+        <h3 class="modal-title" id="myModalLabel">My Well</h3>
       </div>
       <div class="modal-body">
       @if(!isset($well))
@@ -181,17 +186,16 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Login</h4>
+        <h3 class="modal-title" id="myModalLabel">Login</h3>
       </div>
       <div class="modal-body">
       {{ Form::open(array('action'=>'HomeController@doLogin'))}}
-      <br>
       {{ Form::label('email','Enter your Email Address')}}
       {{ Form::text('email',null,array('class'=>'form-control')) }}
       <br>
       {{ Form::label('password','Enter your password')}}
       {{ Form::password('password',array('class'=>'form-control')) }}
-      <br>
+      
 
       </div>
       <div class="modal-footer">
@@ -206,11 +210,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Register</h4>
+        <h3 class="modal-title" id="myModalLabel">Register</h3>
       </div>
       <div class="modal-body">
       {{ Form::open(array('action'=>'HomeController@doRegister'))}}
-      <br>
       {{ Form::label('email','Enter your Email Address')}}
       {{ Form::text('email',null,array('class'=>'form-control')) }}
       <br>
@@ -235,38 +238,5 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <ul class="list-group" id="text">
 </ul>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
 
-  $(".popup").hide();
-  $("#login").hide();
-  $("#mywell").click(function(){
-
-  $(".popup").fadeIn();
-  });
-
-
-  $("#x").click(function(){
-
-    $(".popup").hide();
-    $("#login").hide();
-  });
-
-
-  $("#loginx").click(function(){
-
-    
-    $("#login").hide();
-  });
-
-  $("#loginbutton").click(function(){
-
-    $("#login").slideDown('slow');
-
-  });
-
-});
-
-
-</script>
 @stop

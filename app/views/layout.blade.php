@@ -39,7 +39,7 @@
         @if(Request::is('/'))
         <div class="navbar-form navbar-right">
         <div class="form-group">
-          <input id="pac-input" class="form-control search controls" type="text" placeholder="Search">
+          <input id="pac-input" class="form-control search controls" type="text" placeholder="Where do you live?">
         </div>
         </div>
         @endif

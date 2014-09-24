@@ -107,6 +107,11 @@ p,a{
 	font-size: 14px;
 }
 
+h4{
+
+	font-family: 'Nobile';
+}
+
 li{
 
 	cursor: pointer;
@@ -116,13 +121,17 @@ li{
 label{
 
 	font-family: 'Nobile';
+	font-weight: 300;
 }
 
 li:hover{
 
 	background-color: #E8E8E8 ;
 }
+.btn .btn-info{
 
+	font-family: 'Nobile'
+}
 h1{
 
 	font-family: 'Nobile', sans-serif;
@@ -143,10 +152,6 @@ td:hover{
 
  }
 
-.btn-info{
-
- 	background-color: none;
- }
 
 .navbar-fixed-top{
 
@@ -193,6 +198,12 @@ td:hover{
 	z-index: 100;
 }
 
+.modal-title{
+
+	padding-top: 10px;
+	font-family: 'Nobile';
+}
+
 #pac-input{
 
 	margin-left:40px;
@@ -220,4 +231,31 @@ td:hover{
 .search{
 	margin-top: -8px;
 	height: 55px;
+}
+
+.btn-info{
+
+ 	background: none;
+ 	color:black;
+ 	border: 1px solid #E8E8E8 ;
+ 	  -moz-box-shadow:    1px 1px 1px 1px #ccc;
+  -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+  box-shadow:         1px 1px 1px 1px #ccc;
+
+ }
+
+ .btn-info:hover{
+ 	background-color: #E8E8E8;
+ 	border:none;
+ 	color:black; 
+ };
+
+.form-control::-moz-placeholder {
+  font-family: 'Nobile';
+}
+.form-control:-ms-input-placeholder {
+  font-family: 'Nobile';
+}
+.form-control::-webkit-input-placeholder {
+  font-family: 'Nobile';
 }
