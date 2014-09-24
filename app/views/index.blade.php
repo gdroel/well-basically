@@ -173,6 +173,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       @if(!isset($well))
       {{ Form::submit('Add Well',array('class'=>'btn btn-info')) }}
       @else
+      {{ Form::hidden('well_id',$well->id) }}
       {{ Form::submit('Edit Your Well',array('class'=>'btn btn-info')) }}
       @endif
 

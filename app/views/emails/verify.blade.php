@@ -4,13 +4,14 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Verify Your Email Address</h2>
+        <h3>Verify Your Email Address</h3>
 
         <div>
+            <p>
             Thanks for creating an account with the verification demo app.
             Please follow the link below to verify your email address
             {{ URL::to('confirm/' . $confirmation_code) }}.<br/>
-
+            </p>
         </div>
 
     </body>

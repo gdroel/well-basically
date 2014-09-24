@@ -81,7 +81,7 @@ class HomeController extends BaseController {
 
 	public function doEdit(){
 
-		$well = Address::where('address',Input::get('address'))->first();
+		$well = Address::where('id', Input::get('well_id'))->first();
 
 		$address = Input::get('address');
 		$address = Str::slug($address,'+');
