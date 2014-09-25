@@ -214,7 +214,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <h3 class="modal-title" id="myModalLabel">Register</h3>
       </div>
       <div class="modal-body">
-      {{ Form::open(array('action'=>'HomeController@doRegister'))}}
+      @if($errors->has())
+       @foreach ($errors->all() as $error)
+          <div>{{ $error }}</div>
+      @endforeach
+      @endif
+      {{ Form::open(array('action'=>'HomeController@doRegister','id'=>'registerForm'))}}
       {{ Form::label('email','Enter your Email Address')}}
       {{ Form::text('email',null,array('class'=>'form-control')) }}
       <br>
@@ -239,5 +244,51 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <ul class="list-group" id="text">
 </ul>
 </div>
+<style>
+$(document).ready(function(){
+$("#registerForm").validate({
 
+  rules: {
+  password: {
+  required: true,
+  minlength: 5
+  },
+  username: {
+  required: true,
+  minlength: 5,
+  equalTo: "#password"
+  },
+  email: {
+  required: true,
+  email: true
+  },
+  topic: {
+  required: "#newsletter:checked",
+  minlength: 2
+  },
+  agree: "required"
+  },
+  messages: {
+  username: "Please enter your firstname",
+  lastname: "Please enter your lastname",
+  username: {
+  required: "Please enter a username",
+  minlength: "Your username must consist of at least 2 characters"
+  },
+  password: {
+  required: "Please provide a password",
+  minlength: "Your password must be at least 5 characters long"
+  },
+  confirm_password: {
+  required: "Please provide a password",
+  minlength: "Your password must be at least 5 characters long",
+  equalTo: "Please enter the same password as above"
+  },
+  email: "Please enter a valid email address",
+  agree: "Please accept our policy"
+  }
+  });
+});
+
+</style>
 @stop

@@ -110,8 +110,8 @@ class HomeController extends BaseController {
 
 	public function doRegister(){
 
-        /*$rules = [
-            'username' => 'required|min:6|unique:users',
+        $rules = [
+            'username' => 'required|min:2|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6'
         ];
@@ -129,7 +129,7 @@ class HomeController extends BaseController {
         {
             return Redirect::back()->withInput()->withErrors($validator);
         }
-        */
+        
 
         $confirmation_code = str_random(30);
 
