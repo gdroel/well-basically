@@ -20,7 +20,7 @@ Route::get('/register','HomeController@showRegister');
 Route::post('/register','HomeController@doRegister');
 
 Route::get('/login','HomeController@showLogin');
-Route::post('/login','HomeController@doLogin');
+Route::post('/login', array('as' => 'login', 'uses' => 'HomeController@doLogin'));
 
 Route::post('/edit','HomeController@doEdit');
 Route::get('/logout','HomeController@doLogout');

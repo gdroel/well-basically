@@ -43,7 +43,10 @@
         </div>
         </div>
         @endif
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" id="nav-links">
+
+
+        
         @if(Auth::check())
           @if(Request::is('/'))
           <!-- <li><a id="mywell" href="{{ action('HomeController@showCreate') }}">My Well</a></li> -->
@@ -51,12 +54,13 @@
           <li><a href="{{ action('HomeController@doLogout') }}">Logout</a></li>
           @endif
         @else
-        <li><a data-toggle="modal" data-target="#loginModal">Login</a></li>
-        <li><a data-toggle="modal" data-target="#registerModal">Register</a></li>
+        <li><a data-toggle="modal" data-target="#loginModal" id="login-link">Login</a></li>
+        <li><a data-toggle="modal" data-target="#registerModal" id="register-link">Register</a></li>
         @endif
         @if(Request::is('/'))
         <li><a id="search"><span  class="glyphicon glyphicon-search"></span></a></li>
         @endif
+  
       </ul>
 
     </div><!-- /.navbar-collapse -->

@@ -190,14 +190,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <h3 class="modal-title" id="myModalLabel">Login</h3>
       </div>
       <div class="modal-body">
-      {{ Form::open(array('action'=>'HomeController@doLogin'))}}
+      <div class="login-errors">
+      </div>
+      {{ Form::open(array('action'=>'HomeController@doLogin','method'=>'POST','id'=>'login'))}}
       {{ Form::label('email','Enter your Email Address')}}
       {{ Form::text('email',null,array('class'=>'form-control')) }}
       <br>
       {{ Form::label('password','Enter your password')}}
       {{ Form::password('password',array('class'=>'form-control')) }}
-      
-
       </div>
       <div class="modal-footer">
       {{ Form::submit('Login',array('class'=>'btn btn-info')) }}
@@ -244,51 +244,82 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <ul class="list-group" id="text">
 </ul>
 </div>
-<style>
-$(document).ready(function(){
-$("#registerForm").validate({
-
-  rules: {
-  password: {
-  required: true,
-  minlength: 5
-  },
-  username: {
-  required: true,
-  minlength: 5,
-  equalTo: "#password"
-  },
-  email: {
-  required: true,
-  email: true
-  },
-  topic: {
-  required: "#newsletter:checked",
-  minlength: 2
-  },
-  agree: "required"
-  },
-  messages: {
-  username: "Please enter your firstname",
-  lastname: "Please enter your lastname",
-  username: {
-  required: "Please enter a username",
-  minlength: "Your username must consist of at least 2 characters"
-  },
-  password: {
-  required: "Please provide a password",
-  minlength: "Your password must be at least 5 characters long"
-  },
-  confirm_password: {
-  required: "Please provide a password",
-  minlength: "Your password must be at least 5 characters long",
-  equalTo: "Please enter the same password as above"
-  },
-  email: "Please enter a valid email address",
-  agree: "Please accept our policy"
-  }
+<script type="text/javascript">
+$(document).ready(function()
+{
+  $('form#login').submit(function()
+  {
+    
+    $.ajax({
+      url: "<?php echo URL::route('login');?>",
+      type: "post",
+      data: $('form#login').serialize(),
+      datatype: "json",
+      beforeSend: function()
+      {
+        $('#ajax-loading').show();
+        $(".validation-error-inline").hide();
+      }
+      })
+      .done(function(data)
+      {
+        if (data.validation_failed == 1)
+        {
+          var arr = data.errors;
+          $.each(arr, function(index, value)
+          {
+            if (value.length != 0)
+            {
+              $("#" + index).after('<span class="text-error validation-error-inline">' + value + '</span>');
+            }
+          });
+          $('#ajax-loading').hide();
+        }
+      })
+      .fail(function(jqXHR, ajaxOptions, thrownError)
+      {
+          alert('No response from server');
+      });
+      return false;
   });
-});
 
-</style>
+$('form#login').submit(function()
+  {
+    
+    $.ajax({
+      url: "<?php echo URL::route('login');?>",
+      type: "post",
+      data: $('form#login').serialize(),
+      datatype: "json",
+      beforeSend: function()
+      {
+        $('#ajax-loading').show();
+        $(".validation-error-inline").hide();
+      }
+      })
+      .done(function(data)
+      {
+        if (data.login_failed == 1)
+        {
+
+          $('.login-errors').append('<label><span class="red">Invalid Username or Password</span></label>');
+        }
+        else{
+
+          $('#loginModal').modal('hide');
+          $('#register-link').remove();
+          $('#login-link').remove();
+          $('#nav-links').prepend("<li><a href="+"'<?php echo URL::to('logout');?>'"+">Logout</a></li>");
+          $('#nav-links').prepend('<li><a data-toggle="modal" data-target="#wellModal">My Well</a></li>');
+        }
+      })
+      .fail(function(jqXHR, ajaxOptions, thrownError)
+      {
+          alert('No response from server');
+      });
+      return false;
+  });
+
+});
+</script>
 @stop

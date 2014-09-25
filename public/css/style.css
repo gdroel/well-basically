@@ -22,6 +22,11 @@ p{
 	cursor: pointer;
 }
 
+.red{
+
+	color:red;
+}
+
 .popup{
 
   height: 500px;
@@ -38,7 +43,7 @@ hr{
 
 	line-height: 50%;
 }
-#login,.popup{
+.popup{
 
 
 	z-index: 1;
@@ -53,22 +58,7 @@ hr{
   box-shadow:         3px 3px 5px 6px #ccc;
 
 }
-#login{
 
-  height: 300px;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  z-index: 1;
-  background-color: white;
-  width: 350px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 30px;
-}
 
 .navbar-brand{
 

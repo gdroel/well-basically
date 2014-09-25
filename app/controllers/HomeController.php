@@ -159,22 +159,53 @@ class HomeController extends BaseController {
 
 	public function doLogin(){
 
-	$email = Input::get('email');
-	$password = Input::get('password');
+	$rules = array( 
+	    'email'  => 'required',
+	    'password' => 'required'
+	);
 
-        $credentials = [
-            'username' => Input::get('username'),
-            'password' => Input::get('password'),
-            'confirmed' => 1
-        ];
+	$v = Validator::make(Input::all(), $rules);
 
-	if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)))
-		{
-		    return Redirect::to('/');
-		}
-	
+	if ( ! $v->passes())
+	{
+		
+	    if(Request::ajax())
+	    {                    
+			$response_values = array(
+			'validation_failed' => 1,
+			'errors' =>  $v->errors()->toArray());	            
+			return Response::json($response_values);
+	    }
+	    else
+	    {
+			return Redirect::to('login')
+			->with('validation_failed', 1)
+			->withErrors($v);
+	    }		
+
+	}
+
 	else{
-		return Redirect::to('login');
+
+		$email = Input::get('email');
+		$password = Input::get('password');
+
+		if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)))
+		{
+
+			return Redirect::action('HomeController@index');
+		}
+
+		else{
+
+			$login_values = array(
+
+				'login_failed'=>1,
+				'login_error'=>'invalid username or password',
+			);
+			return Response::json($login_values);
+		}
+
 	}
 
 	}
