@@ -184,8 +184,13 @@ td:hover{
     background-color: gray;
 }
 
+.navbar-fixed-top{
+
+	background-color: none;
+}
+
 .pac-container {
-	z-index: 100;
+	z-index: 100 !important;
 }
 
 .modal-title{
@@ -250,3 +255,16 @@ td:hover{
   font-family: 'Nobile';
 }
 
+@media only screen and (max-width: 40em) { 
+
+	.navbar-fixed-top{
+
+		background-color: white;
+	}
+
+	#pac-input{
+
+		margin-left: 0;
+	}
+
+}

@@ -245,8 +245,33 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </ul>
 </div>
 <script type="text/javascript">
-$(document).ready(function()
-{
+$(document).ready(function(){
+
+
+$("#pac-input").hide();
+$(window).resize(function(){
+  if($(window).width() <= 640){
+
+      $("#pac-input").show();
+      $("#search").hide();
+
+  }
+
+  else{
+
+      $('#search').show();
+
+
+  }
+
+});
+
+$("#search").click(function(){
+  $("#pac-input").toggle();
+});
+
+/*
+  //AJAX Login
   $('form#login').submit(function()
   {
     
@@ -263,48 +288,15 @@ $(document).ready(function()
       })
       .done(function(data)
       {
-        if (data.validation_failed == 1)
-        {
-          var arr = data.errors;
-          $.each(arr, function(index, value)
-          {
-            if (value.length != 0)
-            {
-              $("#" + index).after('<span class="text-error validation-error-inline">' + value + '</span>');
-            }
-          });
-          $('#ajax-loading').hide();
-        }
-      })
-      .fail(function(jqXHR, ajaxOptions, thrownError)
-      {
-          alert('No response from server');
-      });
-      return false;
-  });
-
-$('form#login').submit(function()
-  {
-    
-    $.ajax({
-      url: "<?php echo URL::route('login');?>",
-      type: "post",
-      data: $('form#login').serialize(),
-      datatype: "json",
-      beforeSend: function()
-      {
-        $('#ajax-loading').show();
-        $(".validation-error-inline").hide();
-      }
-      })
-      .done(function(data)
-      {
+        $('.login-errors').empty();
         if (data.login_failed == 1)
         {
 
-          $('.login-errors').append('<label><span class="red">Invalid Username or Password</span></label>');
+          $('.login-errors').append('<div class="alert alert-danger" role="alert">Invalid Username or Password</span></label>');
         }
         else{
+
+        if(data.validation_failed != 1){
 
           $('#loginModal').modal('hide');
           $('#register-link').remove();
@@ -312,14 +304,31 @@ $('form#login').submit(function()
           $('#nav-links').prepend("<li><a href="+"'<?php echo URL::to('logout');?>'"+">Logout</a></li>");
           $('#nav-links').prepend('<li><a data-toggle="modal" data-target="#wellModal">My Well</a></li>');
         }
+        }
+        if (data.validation_failed == 1)
+        {
+          var arr = data.errors;
+          $.each(arr, function(index, value)
+          {
+            if (value.length != 0)
+            {
+              $('.login-errors').append('<div class="alert alert-danger" role="alert">' + value + '</div>');
+            }
+          });
+          $('#ajax-loading').hide();
+        }
       })
-      .fail(function(jqXHR, ajaxOptions, thrownError)
+      .fail(function()
       {
           alert('No response from server');
       });
       return false;
   });
 
+*/
+
 });
+</script>
+<script>
 </script>
 @stop

@@ -58,24 +58,28 @@ class HomeController extends BaseController {
 
 	public function doCreate(){
 
-		$address = Input::get('address');
-		$address = Str::slug($address,'+');
+		if(Auth::check()){
 
-		$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk');
-		$response = json_decode($response,true);
-		$results = $response['results'];
+			$address = Input::get('address');
+			$address = Str::slug($address,'+');
 
-		$address = new Address();
-		$address->address = $results[0]['formatted_address'];
-		$address->lng = $results[0]['geometry']['location']['lng'];
-		$address->lat = $results[0]['geometry']['location']['lat'];
-		$address->depth = Input::get('depth');
-		$address->flow_rate = Input::get('flow_rate');
-		$address->year_dug = Input::get('year_dug');
-		$address->user_id = Auth::user()->id;
-		$address->save();
+			$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk');
+			$response = json_decode($response,true);
+			$results = $response['results'];
 
-		return Redirect::to('/');
+			$address = new Address();
+			$address->address = $results[0]['formatted_address'];
+			$address->lng = $results[0]['geometry']['location']['lng'];
+			$address->lat = $results[0]['geometry']['location']['lat'];
+			$address->depth = Input::get('depth');
+			$address->flow_rate = Input::get('flow_rate');
+			$address->year_dug = Input::get('year_dug');
+			$address->user_id = Auth::user()->id;
+			$address->save();
+
+			return Redirect::to('/');
+
+		}
 
 	}
 
@@ -111,9 +115,9 @@ class HomeController extends BaseController {
 	public function doRegister(){
 
         $rules = [
-            'username' => 'required|min:2|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:6'
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required'
         ];
 
         $input = Input::only(
@@ -169,19 +173,10 @@ class HomeController extends BaseController {
 	if ( ! $v->passes())
 	{
 		
-	    if(Request::ajax())
-	    {                    
-			$response_values = array(
-			'validation_failed' => 1,
-			'errors' =>  $v->errors()->toArray());	            
-			return Response::json($response_values);
-	    }
-	    else
-	    {
-			return Redirect::to('login')
-			->with('validation_failed', 1)
-			->withErrors($v);
-	    }		
+		return Redirect::to('login')
+		->with('validation_failed', 1)
+		->withErrors($v);
+   	
 
 	}
 
@@ -192,18 +187,13 @@ class HomeController extends BaseController {
 
 		if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)))
 		{
-
 			return Redirect::action('HomeController@index');
 		}
 
 		else{
 
-			$login_values = array(
-
-				'login_failed'=>1,
-				'login_error'=>'invalid username or password',
-			);
-			return Response::json($login_values);
+			$login = true;
+			return View::make('login',compact('login'));
 		}
 
 	}

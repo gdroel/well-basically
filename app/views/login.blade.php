@@ -5,8 +5,17 @@
 <div class="col-md-4 col-md-offset-4 movedown">
 <h1>Login</h1>
 <br>
+@if($errors->has())
+   @foreach ($errors->all() as $error)
+      <div class="alert alert-danger" role="alert">{{ $error }}</div>
+  @endforeach
+@endif
+
+
+@if(isset($login))
+	<div class="alert alert-danger">Invalid Username or Password</div>
+@endif
 {{ Form::open(array('action'=>'HomeController@doLogin'))}}
-<br>
 {{ Form::label('email','Enter your Email Address')}}
 {{ Form::text('email',null,array('class'=>'form-control')) }}
 <br>

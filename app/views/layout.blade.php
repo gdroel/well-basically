@@ -69,20 +69,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 @yield('content')
 
-
-<script type="text/javascript">
-$(document).ready(function(){
-
-  $("#pac-input").hide();
-  $("#search").click(function(){
-
-  $("#pac-input").toggle();
-  });
-
-});
-</script>
 </body>
 </html>
