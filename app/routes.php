@@ -26,3 +26,10 @@ Route::post('/edit','HomeController@doEdit');
 Route::get('/logout','HomeController@doLogout');
 
 Route::get('/confirm/{confirmation_code}','HomeController@confirm');
+
+Route::get('home',function(){
+
+	return View::make('home');
+});
+
+Route::controller('password', 'RemindersController');

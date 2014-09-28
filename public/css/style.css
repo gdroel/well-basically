@@ -11,10 +11,31 @@ html, body, #i, #map-canvas {
 	font-family: 'Nobile', sans-serif;
 
 }
+.bg1{
 
+	background-image: url('../images/bg2.jpg');
+	height: 600px;
+	background-size: cover;
+}
+
+.jumbotron{
+
+	background: none;
+	text-align: center;
+}
 p{
 
 	font-family: 'Lato';
+}
+
+.lobster{
+
+	font-family: 'Lobster';
+}
+
+.jumbotron .white{
+
+	color: white;
 }
 
 #x,#loginx{
@@ -125,8 +146,31 @@ li:hover{
 h1{
 
 	font-family: 'Nobile', sans-serif;
-	line-height: 50%
+	font-weight: 700;
 	
+}
+
+.info-box{
+
+	background-color: white;
+	padding:20px;
+}
+
+.btn-outline{
+
+	background-color: none;
+
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+     border:1px solid white;
+     color: black;
+     font-size: 15px;
+}
+
+.jumbotron .big-text{
+
+	font-size: 90px;
 }
 
 
@@ -143,9 +187,12 @@ td:hover{
  }
 
 
+
+
 .navbar-fixed-top{
 
-	padding: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
 	background-color: none;
 }
 
@@ -160,9 +207,19 @@ td:hover{
 	margin-top: 70px;
 }
 
+.jumbotron .gray{
+
+	color: gray;
+}
+
 .movedownless{
 
 	margin-top: 50px;
+}
+
+.movedown200{
+
+	margin-top: 200px;
 }
 
 #type-selector {
@@ -186,12 +243,10 @@ td:hover{
 
 .navbar-fixed-top{
 
-	background-color: none;
+	background-color: white;
 }
 
-.pac-container {
-	z-index: 100 !important;
-}
+.pac-container { z-index:2000 !important; }
 
 .modal-title{
 
@@ -215,7 +270,10 @@ td:hover{
 
 	font-family: 'Lato';
 }
+h2{
 
+	font-family: 'Lato';
+}
 #search{
 
 	background-color: #428bca;
