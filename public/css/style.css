@@ -18,6 +18,25 @@ html, body, #i, #map-canvas {
 	background-size: cover;
 }
 
+.alert{
+
+	-webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+
+}
+
+.scroll{
+
+	overflow-y: scroll;
+	height: 400px;
+}
+
+#success-alert{
+
+	background-color: #33CC00;
+	color: white ;
+}
 .message{
 
 	margin-bottom: 5px;

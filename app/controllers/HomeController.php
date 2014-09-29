@@ -116,7 +116,7 @@ class HomeController extends BaseController {
 			$well->user_id = Auth::user()->id;
 			$well->save();
 
-			Session::Flash('message','Thank You For Updating Your Well Status');
+			Session::Flash('message','Thanks for updating your well status!');
 
 			return Redirect::action('HomeController@index');
 
@@ -175,7 +175,7 @@ class HomeController extends BaseController {
                 ->subject('Verify your email address');
         });
 
-        Session::Flash('message','Thanks for Registering! Check your Email to Verify Your Account.');
+        Session::Flash('message','Thanks for registering! Check your email to verify your account.');
         return Redirect::action('HomeController@index');
     }
 

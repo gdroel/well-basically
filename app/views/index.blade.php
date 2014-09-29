@@ -281,7 +281,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div class="col-md-9" id="i">
   <div id="map-canvas"></div>
 </div>
-<div class="col-md-3 movedown70">
+<div class="col-md-3 movedown70 scroll">
 
 @if (Session::has('message'))
 <div class="alert alert-success alert-dismissible message"  id="success-alert" role="alert">
@@ -290,6 +290,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </div>
 @endif
 <ul class="list-group" id="text">
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
+  <li class="list-group-item">HELLO</li>
 </ul>
 </div>
 <script type="text/javascript">

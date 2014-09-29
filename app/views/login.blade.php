@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="col-md-4 col-md-offset-4 movedown">
-<h1>Login</h1>
-<br>
+<h2>Login</h2>
+<hr>
 @if($errors->has())
    @foreach ($errors->all() as $error)
       <div class="alert alert-danger" role="alert">{{ $error }}</div>
