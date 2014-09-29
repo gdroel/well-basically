@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/create','HomeController@showCreate');
+Route::get('/create', array('before'=>'auth','uses'=>'HomeController@showCreate'));
 Route::post('/create','HomeController@doCreate');
 
 Route::get('/register','HomeController@showRegister');
@@ -22,8 +22,8 @@ Route::post('/register','HomeController@doRegister');
 Route::get('/login','HomeController@showLogin');
 Route::post('/login', array('as' => 'login', 'uses' => 'HomeController@doLogin'));
 
-Route::post('/edit','HomeController@doEdit');
-Route::get('/logout','HomeController@doLogout');
+Route::post('/edit',array('before'=>'auth', 'uses'=> 'HomeController@doEdit'));
+Route::get('/logout',array('before'=>'auth', 'uses'=> 'HomeController@doLogout'));
 
 Route::get('/confirm/{confirmation_code}','HomeController@confirm');
 

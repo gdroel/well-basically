@@ -280,11 +280,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </div>
   </div>
 </div>
-<div class="col-md-9" id="i">
+<div class="col-sm-9" id="i">
   <div id="map-canvas"></div>
 </div>
-<div class="col-md-3 movedown70 scroll">
-
+<div class="col-sm-3 movedown70 scroll">
 @if (Session::has('message'))
 <div class="alert alert-success alert-dismissible message"  id="success-alert" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -295,9 +294,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </ul>
 
 </div>
-<div class="footer">
-<p>&copy 2014 Well Basically</p>
-</div>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
