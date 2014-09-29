@@ -31,6 +31,7 @@ class RemindersController extends Controller {
 				return Redirect::back()->with('error', Lang::get($response));
 
 			case Password::REMINDER_SENT:
+				Session::Flash('message','Reminder email has been sent.');
 				return Redirect::action('HomeController@index');
 		}
 
@@ -75,6 +76,8 @@ class RemindersController extends Controller {
 				return Redirect::back()->with('error', Lang::get($response));
 
 			case Password::PASSWORD_RESET:
+
+				Session::Flash('message','Password has been successfully reset.');
 				return Redirect::to('/');
 		}
 	}

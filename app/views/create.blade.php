@@ -4,7 +4,11 @@
 <div class="container">
 <div class="col-md-6 col-md-offset-3 movedown">
 <h1>My Well</h1>
-
+@if($errors->has())
+   @foreach ($errors->all() as $error)
+      <div class="alert alert-danger" role="alert">{{ $error }}</div>
+  @endforeach
+@endif
 @if(!isset($well))
 {{ Form::open(array('action'=>'HomeController@doCreate')) }}
 @else
@@ -55,6 +59,7 @@
 @if(!isset($well))
 {{ Form::submit('Add Well',array('class'=>'btn btn-info')) }}
 @else
+{{ Form::hidden('well_id',$well->id )}}
 {{ Form::submit('Edit Your Well',array('class'=>'btn btn-info')) }}
 @endif
 

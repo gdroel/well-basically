@@ -85,25 +85,48 @@ class HomeController extends BaseController {
 
 	public function doEdit(){
 
-		$well = Address::where('id', Input::get('well_id'))->first();
+		$input = Input::all();
+		$rules = [
 
-		$address = Input::get('address');
-		$address = Str::slug($address,'+');
+			'flow_rate' => 'required|numeric',
+			'year_dug' => 'required|digits:4',
+			'depth' => 'required|numeric|digits_between:1,4'
 
-		$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk');
-		$response = json_decode($response,true);
-		$results = $response['results'];
+		];
 
-		$well->address = $results[0]['formatted_address'];
-		$well->lng = $results[0]['geometry']['location']['lng'];
-		$well->lat = $results[0]['geometry']['location']['lat'];
-		$well->depth = Input::get('depth');
-		$well->flow_rate = Input::get('flow_rate');
-		$well->year_dug = Input::get('year_dug');
-		$well->user_id = Auth::user()->id;
-		$well->save();
+		$validator = Validator::make($input,$rules);
 
-		return Redirect::action('HomeController@index');
+		if($validator->passes()){
+
+			$well = Address::where('id', Input::get('well_id'))->first();
+
+			$address = Input::get('address');
+			$address = Str::slug($address,'+');
+
+			$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk');
+			$response = json_decode($response,true);
+			$results = $response['results'];
+
+			$well->address = $results[0]['formatted_address'];
+			$well->lng = $results[0]['geometry']['location']['lng'];
+			$well->lat = $results[0]['geometry']['location']['lat'];
+			$well->depth = Input::get('depth');
+			$well->flow_rate = Input::get('flow_rate');
+			$well->year_dug = Input::get('year_dug');
+			$well->user_id = Auth::user()->id;
+			$well->save();
+
+			Session::Flash('message','Thank You For Updating Your Well Status');
+
+			return Redirect::action('HomeController@index');
+
+		}
+
+		else{
+		
+			return Redirect::action('HomeController@showCreate')->withInput()->withErrors($validator);
+
+		}
 
 	}
 
@@ -115,9 +138,9 @@ class HomeController extends BaseController {
 	public function doRegister(){
 
         $rules = [
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required'
+            'username' => 'required|min:6|max:15|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|max:20'
         ];
 
         $input = Input::only(
@@ -131,7 +154,7 @@ class HomeController extends BaseController {
 
         if($validator->fails())
         {
-            return Redirect::back()->withInput()->withErrors($validator);
+            return Redirect::action('HomeController@showRegister')->withInput()->withErrors($validator);
         }
         
 
@@ -152,6 +175,7 @@ class HomeController extends BaseController {
                 ->subject('Verify your email address');
         });
 
+        Session::Flash('message','Thanks for Registering! Check your Email to Verify Your Account.');
         return Redirect::action('HomeController@index');
     }
 
@@ -187,6 +211,9 @@ class HomeController extends BaseController {
 
 		if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)))
 		{
+
+			Session::Flash('message','You have successfully logged in.');
+
 			return Redirect::action('HomeController@index');
 		}
 
@@ -203,6 +230,7 @@ class HomeController extends BaseController {
 	public function doLogout(){
 
 		Auth::logout();
+		Session::Flash('message','You have successfully logged out.');
 		return Redirect::action('HomeController@index');
 	}
 
@@ -215,6 +243,7 @@ class HomeController extends BaseController {
         $user->confirmation_code = null;
         $user->save();
 
+		Session::Flash('message','Your account has been confirmed.');
         return Redirect::action('HomeController@index');
     }
 }

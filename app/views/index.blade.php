@@ -279,6 +279,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <div id="map-canvas"></div>
 </div>
 <div class="col-md-3 movedown70">
+
+@if (Session::has('message'))
+<div class="alert alert-success alert-dismissible message"  id="success-alert" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  {{ Session::get('message') }}
+</div>
+@endif
 <ul class="list-group" id="text">
 </ul>
 </div>
@@ -306,6 +313,11 @@ $(window).resize(function(){
 
 $("#search").click(function(){
   $("#pac-input").toggle();
+});
+
+$("#success-alert").alert();
+$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+$("#success-alert").alert('close');
 });
 
 /*

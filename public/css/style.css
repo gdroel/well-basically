@@ -18,6 +18,11 @@ html, body, #i, #map-canvas {
 	background-size: cover;
 }
 
+.message{
+
+	margin-bottom: 5px;
+}
+
 .jumbotron{
 
 	background: none;
