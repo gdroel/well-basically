@@ -1,12 +1,15 @@
 @extends('layout')
 
 @section('content')
+
 <script type="text/javascript">
 var map = null;
 var marker = null;
 var gmarkers = [];
 
 var wells = <?php echo $addresses ?>;
+console.log(<?php echo $addresses ?>);
+
 function initialize() {
 var placesArray = [];
   var mapOptions = {
@@ -110,6 +113,13 @@ function setMarkers(map, locations) {
       infowindow.close();
     });
 
+
+    var t = well['updated_at'].split(/[- :]/);
+    var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+
+    
+
+    var date = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
@@ -125,7 +135,7 @@ function setMarkers(map, locations) {
             '<br> Drilled in: '+
             locations[i]['year_dug']+
             '<br> Post Updated On: '+
-            well['update_at']+'</p>'
+            date+'</p>'
 
             );
           infowindow.open(map, marker);
