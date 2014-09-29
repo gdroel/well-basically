@@ -63,7 +63,7 @@ function myclick(i) {
 
 
 function setMarkers(map, locations) {
-
+var allmarkers = [];
   var image = {
     url: 'images/bluemarker.png',
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -293,10 +293,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 @endif
 <ul class="list-group" id="text">
 </ul>
+
+</div>
 <div class="footer">
 <p>&copy 2014 Well Basically</p>
-</div>
-
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
