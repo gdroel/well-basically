@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
 <div class="col-md-6 col-md-offset-3 movedown">
-<h1>My Well</h1>
+<h2>My Well</h2>
+<hr>
 @if($errors->has())
    @foreach ($errors->all() as $error)
       <div class="alert alert-danger" role="alert">{{ $error }}</div>
@@ -14,7 +15,6 @@
 @else
 {{ Form::open(array('action'=>'HomeController@doEdit')) }}
 @endif
-
 {{ Form::label('address','Address') }}
 
 @if(isset($well))

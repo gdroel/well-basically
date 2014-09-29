@@ -14,7 +14,10 @@ function initialize() {
 var placesArray = [];
   var mapOptions = {
     zoom: 10,
-    center: new google.maps.LatLng(35, -121)
+    center: new google.maps.LatLng(35, -121),
+    mapTypeControl: false,
+    streetViewControl: false,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   }
 
   var map = new google.maps.Map(document.getElementById('map-canvas'),
