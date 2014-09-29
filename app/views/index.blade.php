@@ -6,9 +6,9 @@
 var map = null;
 var marker = null;
 var gmarkers = [];
+var allmarkers = [];
 
 var wells = <?php echo $addresses ?>;
-console.log(<?php echo $addresses ?>);
 
 function initialize() {
 var placesArray = [];
@@ -52,10 +52,7 @@ var placesArray = [];
     });
 
   google.maps.event.addListener(map, 'bounds_changed', function(){setMarkers(map, wells)});
-  google.maps.event(marker, 'click',function(){
 
-    infowindow.close();
-  })
 
 }
 
@@ -103,7 +100,10 @@ function setMarkers(map, locations) {
         shape: shape
     });
 
-    if(map.getBounds().contains(marker.getPosition()) ){
+    allmarkers.push(marker);
+
+     if(map.getBounds().contains(marker.getPosition()) ){
+
 
       gmarkers.push(marker);
 
@@ -146,6 +146,8 @@ function setMarkers(map, locations) {
         }
       })(marker, i,infowindow));
 }
+
+  var markerClusterer = new MarkerClusterer(map, allmarkers);
 
 }
 
@@ -290,25 +292,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </div>
 @endif
 <ul class="list-group" id="text">
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
-  <li class="list-group-item">HELLO</li>
 </ul>
+<div class="footer">
+<p>&copy 2014 Well Basically</p>
+</div>
+
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-
 
 $("#pac-input").hide();
 $(window).resize(function(){
@@ -336,7 +327,6 @@ $("#success-alert").alert();
 $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
 $("#success-alert").alert('close');
 });
-
 /*
   //AJAX Login
   $('form#login').submit(function()

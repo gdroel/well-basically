@@ -26,6 +26,16 @@ html, body, #i, #map-canvas {
 
 }
 
+.modal{
+
+	border-radius: 0 !important;
+}
+
+.footer{
+
+	background-color: white;
+}
+
 .scroll{
 
 	overflow-y: scroll;
