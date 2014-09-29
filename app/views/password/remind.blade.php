@@ -5,10 +5,11 @@
 
 <div class="col-md-4 col-md-offset-4 movedown">
 <h2>Reset Password</h2>
+<hr>
 <form action="{{ action('RemindersController@postRemind') }}" method="POST">
-	<label for="email">Enter Your Email</label>
-    <input type="email" name="email" class="form-control">
-    <input type="submit" value="Send Reminder">
+    <input type="email" name="email" class="form-control" placeholder="Your Email">
+    <br>
+    <input type="submit" class="btn btn-info" value="Send Reminder">
 </form>
 </div>
 @stop

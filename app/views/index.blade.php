@@ -46,6 +46,10 @@ var placesArray = [];
     });
 
   google.maps.event.addListener(map, 'bounds_changed', function(){setMarkers(map, wells)});
+  google.maps.event(marker, 'click',function(){
+
+    infowindow.close();
+  })
 
 }
 
@@ -56,6 +60,25 @@ function myclick(i) {
 
 
 function setMarkers(map, locations) {
+
+  var image = {
+    url: 'images/bluemarker.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+  // Shapes define the clickable region of the icon.
+  // The type defines an HTML &lt;area&gt; element 'poly' which
+  // traces out a polygon as a series of X,Y points. The final
+  // coordinate closes the poly by connecting to the first
+  // coordinate.
+  var shape = {
+      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
   var side_bar_html = '';
   side_bar_html = document.getElementById('text');
   side_bar_html.innerHTML = '';
@@ -69,7 +92,9 @@ function setMarkers(map, locations) {
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: well['address']
+        title: well['address'],
+        icon: image,
+        shape: shape
     });
 
     if(map.getBounds().contains(marker.getPosition()) ){
@@ -88,6 +113,7 @@ function setMarkers(map, locations) {
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
+          infowindow.close();
           infowindow.setContent(
             '<p>'+locations[i]['address']+
             '<br>'+
@@ -105,7 +131,7 @@ function setMarkers(map, locations) {
           infowindow.open(map, marker);
           map.setCenter(marker.getPosition());
         }
-      })(marker, i));
+      })(marker, i,infowindow));
 }
 
 }
@@ -198,8 +224,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <br>
       {{ Form::label('password','Enter your password')}}
       {{ Form::password('password',array('class'=>'form-control')) }}
+
       </div>
       <div class="modal-footer">
+      <small class="pull-left"><a href="{{ action('RemindersController@getRemind') }}">Forgot Password?</a></small>
       {{ Form::submit('Login',array('class'=>'btn btn-info')) }}
       {{ Form::close() }}
       </div>
