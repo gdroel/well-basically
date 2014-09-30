@@ -18,6 +18,52 @@ html, body, #i, #map-canvas {
 	background-size: cover;
 }
 
+.big-p{
+
+	font-size: 20px;
+}
+
+.bg2{
+
+	background-image: url('../images/map.jpg');
+	height: 600px;
+	background-size: cover;
+}
+
+.bg3{
+
+	background-image: url('../images/simple-water.jpg');
+	height: 100%;
+	background-size: cover;
+
+}
+
+.register-box{
+
+	background: rgba(255,255,255,.6);
+	padding: 20px;
+	border-radius: 10px;
+}
+
+
+.bg4{
+
+	background-image: url('../images/forest-simple.jpg');
+	height: 100%;
+	background-size: cover;
+
+}
+
+.bg5{
+
+
+	background-image: url('../images/ocean-simple.jpg');
+	height: 100%;
+	background-size: cover;
+}
+
+
+
 .alert{
 
 	-webkit-border-radius: 0px;
@@ -236,6 +282,11 @@ td:hover{
 	background-color: #428bca;
 }
 
+.white{
+
+	color:white;
+	text-align: center;
+}
 .movedown{
 
 	margin-top: 100px;
@@ -327,7 +378,7 @@ h2{
 
 .btn-info{
 
- 	background: none;
+ 	background: white;
  	color:black;
  	border: 1px solid #E8E8E8 ;
  	  -moz-box-shadow:    1px 1px 1px 1px #ccc;

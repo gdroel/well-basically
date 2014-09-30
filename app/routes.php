@@ -27,9 +27,9 @@ Route::get('/logout',array('before'=>'auth', 'uses'=> 'HomeController@doLogout')
 
 Route::get('/confirm/{confirmation_code}','HomeController@confirm');
 
-Route::get('home',function(){
+Route::get('about',function(){
 
-	return View::make('home');
+	return View::make('about');
 });
 
 Route::controller('password', 'RemindersController');
