@@ -23,6 +23,13 @@ html, body, #i, #map-canvas {
 	font-size: 20px;
 }
 
+.modal{
+
+	 -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+     border-radius: 0px !important;
+}
+
 .bg2{
 
 	background-image: url('../images/map.jpg');

@@ -2,24 +2,23 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+	/**
+	 * Returns home page of all the wells, the index.
+	 * 
+	 * @return index.blade.php View
+	 */
+	
 	public function index(){
+
+		/* 
+		Sets the Well Variable to null, or to the current users well. Used
+		for populating the well modal (not model, I'm talking about the bootstrap component) 
+		with information 
+		*/
 
 		if(Auth::check()){
 
 			if(Address::where('user_id',Auth::user()->id)->first()){
-
 			$well = Address::where('user_id',Auth::user()->id)->first();
 		}
 
@@ -31,18 +30,25 @@ class HomeController extends BaseController {
 
 		}
 
+		//Gets all the Addresses from the database, then puts them into JSON so Javascript can read it.
+
 		$addresses = Address::all();
 		$addresses = json_encode($addresses);
 
 		return View::make('index',compact('addresses','well'));
 	}
 
+	/**
+	 * Simply returns the the create view, with the well variable.
+	 * 
+	 * @return View Returns, create.blade.php with the well variable, which is used for populating the editing form
+	 */
+
 	public function showCreate(){
 
 		if(Auth::check()){
 
 			if(Address::where('user_id',Auth::user()->id)->first()){
-
 			$well = Address::where('user_id',Auth::user()->id)->first();
 		}
 
@@ -56,6 +62,12 @@ class HomeController extends BaseController {
 		return View::make('create',compact('well'));
 	}
 
+	/**
+	 * Adds new Address Record to database
+	 * 
+	 * @return  Redirect successfully redirects to home page
+	 */
+
 	public function doCreate(){
 
 		if(Auth::check()){
@@ -63,8 +75,10 @@ class HomeController extends BaseController {
 			$address = Input::get('address');
 			$address = Str::slug($address,'+');
 
+			//Sends address through Google Maps Geocoding API, which converts it to Lat and Lng Values 
 			$response = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk');
 			$response = json_decode($response,true);
+
 			$results = $response['results'];
 
 			$address = new Address();
@@ -77,11 +91,17 @@ class HomeController extends BaseController {
 			$address->user_id = Auth::user()->id;
 			$address->save();
 
-			return Redirect::to('/');
+			return Redirect::to('HomeController@index');
 
 		}
 
 	}
+
+	/**
+	 * Edits the address, from the address editing form
+	 *
+	 * @return  Redirect Redirects depending on whether validation passed
+	 */
 
 	public function doEdit(){
 
@@ -98,6 +118,7 @@ class HomeController extends BaseController {
 
 		if($validator->passes()){
 
+			//Hidden field where we can get the well ID
 			$well = Address::where('id', Input::get('well_id'))->first();
 
 			$address = Input::get('address');
@@ -116,6 +137,7 @@ class HomeController extends BaseController {
 			$well->user_id = Auth::user()->id;
 			$well->save();
 
+			//Sets session variable, we retrieve this on the index page to show the user a notification
 			Session::Flash('message','Thanks for updating your well status!');
 
 			return Redirect::action('HomeController@index');
@@ -130,10 +152,22 @@ class HomeController extends BaseController {
 
 	}
 
+	/**
+	 * 
+	 * Super simple method, returns register view
+	 * @return Register View
+	 */
+
 	public function showRegister(){
 
 		return View::make('register');
 	}
+
+	/**
+	 * Adds a user to the database, sends them an email with confirmation code
+	 *
+	 * @return Redirect
+	 */
 
 	public function doRegister(){
 
@@ -152,8 +186,8 @@ class HomeController extends BaseController {
 
         $validator = Validator::make($input, $rules);
 
-        if($validator->fails())
-        {
+        if($validator->fails()) {
+
             return Redirect::action('HomeController@showRegister')->withInput()->withErrors($validator);
         }
         
@@ -169,15 +203,30 @@ class HomeController extends BaseController {
         
         $user->save();
 
+        /*
+        
+        Sends with the view emails.verify, which has a link with the confirmation code.
+        The user clicks the code, then, it redirects them to the confirm method. Also,
+        this code sends from gdroel@gmail.com, which needs to be changed to a corporate
+        account.
+
+         */
         Mail::send('emails.verify', compact('confirmation_code'), function($message) {
 
             $message->to(Input::get('email'), Input::get('username'))
                 ->subject('Verify your email address');
         });
 
+        // Sets message session variable, which can be accessed in the index view.
         Session::Flash('message','Thanks for registering! Check your email to verify your account.');
+
         return Redirect::action('HomeController@index');
     }
+
+    /**
+     * 
+     * @return View returns Login View
+     */
 
 	public function showLogin(){
 
@@ -185,48 +234,60 @@ class HomeController extends BaseController {
 
 	}
 
+	/**
+	 * This method logs a user in, but has some comple complexities.
+	 * For the login to be valid, the confirmed value must be equal to 1
+	 * If this is equal to 0, the login will fail, because they have not
+	 * clicked the verification link in their email.
+	 * 
+	 * @return  Redirect 
+	 */
+
 	public function doLogin(){
 
-	$rules = array( 
-	    'email'  => 'required',
-	    'password' => 'required'
-	);
+		$rules = array( 
+		    'email'  => 'required',
+		    'password' => 'required'
+		);
 
-	$v = Validator::make(Input::all(), $rules);
+		$validator = Validator::make(Input::all(), $rules);
 
-	if ( ! $v->passes())
-	{
-		
-		return Redirect::to('login')
-		->with('validation_failed', 1)
-		->withErrors($v);
-   	
+		if ($validator->fails()) {
+			
+			return Redirect::to('login')
+			->with('validation_failed', 1)
+			->withErrors($validator);
+	   	
 
-	}
-
-	else{
-
-		$email = Input::get('email');
-		$password = Input::get('password');
-
-		if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)))
-		{
-
-			Session::Flash('message','You have successfully logged in.');
-
-			return Redirect::action('HomeController@index');
 		}
 
 		else{
 
-			$login = true;
-			return View::make('login',compact('login'));
+			$email = Input::get('email');
+			$password = Input::get('password');
+
+			if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)) ){
+
+				Session::Flash('message','You have successfully logged in.');
+				return Redirect::action('HomeController@index');
+			}
+
+			else{
+
+				//If this is true, the view displays a message that says 'invalid username or password'
+				$login = true;
+				return View::make('login',compact('login'));
+			}
+
 		}
 
 	}
 
-	}
-
+	/**
+	 * Logs people out, easy peasy
+	 * 
+	 * @return Redirect
+	 */
 	public function doLogout(){
 
 		Auth::logout();
@@ -234,8 +295,17 @@ class HomeController extends BaseController {
 		return Redirect::action('HomeController@index');
 	}
 
-    public function confirm($confirmation_code)
-    {
+	/**
+	 * This method confirms the user, or in technical terms, sets the confirmed column in that row to 1
+	 * If this is set to 1, then the user is confirmed, and allowed to login. This method gets the confirmation
+	 * code that was sent in the email, then finds the user with the same confirmation code in the database.
+	 * Finally, it sets the  confirmation code to null, because it is unneeeded.
+	 * 
+	 * @param  [type] $confirmation_code, Gets confirmation code from confirm route
+	 * @return [type]
+	 */
+	
+    public function confirm($confirmation_code){
 
         $user = User::where('confirmation_code',$confirmation_code)->first();
 
