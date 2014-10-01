@@ -1,3 +1,23 @@
+/**
+ * Well Basically Entire Styles
+ *
+ * This style was made by Gabe
+ * Roeloffs, it is designed to 
+ * make wellbasically.com look
+ * pretty darn snazzy.
+ * 
+ * @project   Well Basically
+ * @author    Gabe Roeloffs
+ * @copyright 2014 by Gabe Roeloffs
+*/
+
+
+/***********************/
+/***********************/
+/*Generic Page Elements*/
+/***********************/
+/***********************/
+
 html, body, #i, #map-canvas { 
 
 	height: 100%;
@@ -5,17 +25,84 @@ html, body, #i, #map-canvas {
 	padding: 0; 
 }
 
-.pac-container,p,a,li,label::-webkit-input-placeholder,:-moz-placeholder,
-::-moz-placeholder,:-ms-input-placeholder {
+.footer{
+
+	background-color: white;
+}
+
+.jumbotron .white{
+
+	color: white;
+}
+
+#map-canvas {
+    display:block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:70px; /* Set margin to your navbar height */
+}
+
+
+
+/***********************/
+/***********************/
+/***  Text & Buttons  **/
+/***********************/
+/***********************/
+p{
+
+	font-family: 'Lato';
+}
+
+h1{
+
+	font-family: 'Nobile', sans-serif;
+	font-weight: 700;
+	
+}
+
+h2{
+
+	font-family: 'Lato';
+}
+
+h4{
+
+	font-family: 'Nobile';
+}
+
+p,a{
+
+	font-size: 14px;
+}
+
+li{
+
+	cursor: pointer;
+	list-style: none;
+}
+
+label{
+
+	font-family: 'Nobile';
+	font-weight: 300;
+}
+
+
+hr{
+
+	line-height: 50%;
+}
+
+
+.pac-container,p,a,li,label{
 
 	font-family: 'Nobile', sans-serif;
 
-}
-.bg1{
-
-	background-image: url('../images/bg2.jpg');
-	height: 600px;
-	background-size: cover;
 }
 
 .big-p{
@@ -23,11 +110,71 @@ html, body, #i, #map-canvas {
 	font-size: 20px;
 }
 
-.modal{
+.red{
 
-	 -webkit-border-radius: 0px !important;
-    -moz-border-radius: 0px !important;
-     border-radius: 0px !important;
+	color:red;
+}
+
+
+.white{
+
+	color:white;
+	text-align: center;
+}
+
+.lobster{
+
+	font-family: 'Lobster';
+}
+
+#search{
+
+	background-color: #428bca;
+	color:white;
+	margin-right: -40px;
+}
+
+/* Buttons */
+
+.btn-info{
+
+ 	background: white;
+ 	color:black;
+ 	border: 1px solid #E8E8E8 ;
+ 	-moz-box-shadow:    1px 1px 1px 1px #ccc;
+  	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+  	box-shadow:         1px 1px 1px 1px #ccc;
+  	font-family: 'Nobile'
+
+ }
+
+.btn-info:hover{
+ 	background-color: #E8E8E8;
+ 	border:none;
+ 	color:black; 
+ }
+
+.btn-outline{
+
+	background-color: none;
+	-webkit-border-radius: 0;
+-moz-border-radius: 0;
+     border-radius: 0;
+     border:1px solid white;
+     color: black;
+     font-size: 15px;
+}
+
+/***********************/
+/***********************/
+/****   Main Body   ****/
+/***********************/
+/***********************/
+.bg1{
+
+	background-image: url('../images/bg2.jpg');
+	height: 600px;
+	background-size: cover;
 }
 
 .bg2{
@@ -45,14 +192,6 @@ html, body, #i, #map-canvas {
 
 }
 
-.register-box{
-
-	background: rgba(255,255,255,.6);
-	padding: 20px;
-	border-radius: 10px;
-}
-
-
 .bg4{
 
 	background-image: url('../images/forest-simple.jpg');
@@ -63,46 +202,9 @@ html, body, #i, #map-canvas {
 
 .bg5{
 
-
 	background-image: url('../images/ocean-simple.jpg');
 	height: 100%;
 	background-size: cover;
-}
-
-
-
-.alert{
-
-	-webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-
-}
-
-.modal{
-
-	border-radius: 0 !important;
-}
-
-.footer{
-
-	background-color: white;
-}
-
-.scroll{
-
-	overflow-y: scroll;
-	height: 400px;
-}
-
-#success-alert{
-
-	background-color: #33CC00;
-	color: white ;
-}
-.message{
-
-	margin-bottom: 5px;
 }
 
 .jumbotron{
@@ -110,68 +212,63 @@ html, body, #i, #map-canvas {
 	background: none;
 	text-align: center;
 }
-p{
 
-	font-family: 'Lato';
+.jumbotron .gray{
+
+	color: gray;
 }
 
-.lobster{
+.jumbotron .big-text{
 
-	font-family: 'Lobster';
-}
-
-.jumbotron .white{
-
-	color: white;
-}
-
-#x,#loginx{
-
-	cursor: pointer;
-}
-
-.red{
-
-	color:red;
-}
-
-.popup{
-
-  height: 500px;
-  
-  background-color: white;
-  width: 600px;
- 
-
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 30px;
-}
-hr{
-
-	line-height: 50%;
-}
-.popup{
-
-
-	z-index: 1;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  -moz-box-shadow:    3px 3px 5px 6px #ccc;
-  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-  box-shadow:         3px 3px 5px 6px #ccc;
-
+	font-size: 90px;
 }
 
 
-.navbar-brand{
+.register-box{
 
-	font-family: 'Lobster';
-	font-size: 30px;
+	background: rgba(255,255,255,.6);
+	padding: 20px;
+	border-radius: 10px;
+}
+
+.modal-title{
+
+	padding-top: 10px;
+	font-family: 'Nobile';
+}
+
+.info-box{
+
+	background-color: white;
+	padding:20px;
+}
+
+
+/***********************/
+/***********************/
+/****    Sidebar    ****/
+/***********************/
+/***********************/
+
+.alert{
+
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+
+}
+
+#success-alert{
+
+	background-color: #33CC00;
+	color: white ;
+	margin-bottom: 5px;
+}
+
+.scroll{
+
+	overflow-y: scroll;
+	height: 400px;
 }
 
 .list-group-item{
@@ -182,6 +279,35 @@ hr{
           border-radius: 0 !important ;
 }
 
+li:hover{
+
+	background-color: #E8E8E8 ;
+}
+
+.list-group-item{
+
+	font-family: 'Lato';
+}
+
+/***********************/
+/***********************/
+/****   Navigation  ****/
+/***********************/
+/***********************/
+
+.navbar-fixed-top{
+
+	padding-top: 10px;
+	padding-right: 10px;
+	background-color: white;
+}
+
+.navbar-brand{
+
+	font-family: 'Lobster';
+	font-size: 30px;
+}
+
 
 .navbar .nav > li > a, .navbar .nav > li > a{
 
@@ -190,110 +316,18 @@ hr{
 	line-height: 150%
 }
 
-#map-canvas {
-    display:block;
-    position:absolute;
-    height:auto;
-    bottom:0;
-    top:0;
-    left:0;
-    right:0;
-    margin-top:50px; /* Set margin to your navbar height */
-}
-p,a{
-
-	font-size: 14px;
-}
-
-h4{
-
-	font-family: 'Nobile';
-}
-
-li{
-
-	cursor: pointer;
-	list-style: none;
-}
-
-label{
-
-	font-family: 'Nobile';
-	font-weight: 300;
-}
-
-li:hover{
-
-	background-color: #E8E8E8 ;
-}
-.btn .btn-info{
-
-	font-family: 'Nobile'
-}
-h1{
-
-	font-family: 'Nobile', sans-serif;
-	font-weight: 700;
-	
-}
-
-.info-box{
-
-	background-color: white;
-	padding:20px;
-}
-
-.btn-outline{
-
-	background-color: none;
-
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
-     border:1px solid white;
-     color: black;
-     font-size: 15px;
-}
-
-.jumbotron .big-text{
-
-	font-size: 90px;
+.navbar-fixed-top .navbar-toggle .icon-bar {
+    background-color: gray;
 }
 
 
-td:hover{
 
-	background-color: #E8E8E8 ;
-	cursor: pointer;
-}
- #map-canvas {
+/***********************/
+/***********************/
+/****    Movedown   ****/
+/***********************/
+/***********************/
 
- 	margin-top: 70px;
- 	width: 100%;
-
- }
-
-
-
-
-.navbar-fixed-top{
-
-	padding-top: 10px;
-	padding-right: 10px;
-	background-color: none;
-}
-
-.navbar-fixed-bottom{
-
-	background-color: white;
-	background-color: #428bca;
-}
-
-.white{
-
-	color:white;
-	text-align: center;
-}
 .movedown{
 
 	margin-top: 100px;
@@ -304,11 +338,6 @@ td:hover{
 	margin-top: 70px;
 }
 
-.jumbotron .gray{
-
-	color: gray;
-}
-
 .movedownless{
 
 	margin-top: 50px;
@@ -317,6 +346,45 @@ td:hover{
 .movedown200{
 
 	margin-top: 200px;
+}
+
+/***********************/
+/***********************/
+/****    Forms      ****/
+/***********************/
+/***********************/
+
+
+.form-control::-moz-placeholder {
+  font-family: 'Nobile';
+}
+.form-control:-ms-input-placeholder {
+  font-family: 'Nobile';
+}
+.form-control::-webkit-input-placeholder {
+  font-family: 'Nobile';
+}
+
+.pac-container{
+
+ 	z-index:2000 !important; 
+}
+
+.search{
+	margin-top: -8px;
+	height: 55px;
+}
+
+.form-control{
+
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+
+#pac-input{
+
+	margin-left:40px;
 }
 
 #type-selector {
@@ -334,81 +402,12 @@ td:hover{
 	z-index: 100;
 }
 
-.navbar-fixed-top .navbar-toggle .icon-bar {
-    background-color: gray;
-}
+/***********************/
+/***********************/
+/**** Media Queries ****/
+/***********************/
+/***********************/
 
-.navbar-fixed-top{
-
-	background-color: white;
-}
-
-.pac-container { z-index:2000 !important; }
-
-.modal-title{
-
-	padding-top: 10px;
-	font-family: 'Nobile';
-}
-
-#pac-input{
-
-	margin-left:40px;
-}
-
-.form-control{
-
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
-}
-
-.list-group-item{
-
-	font-family: 'Lato';
-}
-h2{
-
-	font-family: 'Lato';
-}
-#search{
-
-	background-color: #428bca;
-	color:white;
-	margin-right: -40px;
-}
-
-.search{
-	margin-top: -8px;
-	height: 55px;
-}
-
-.btn-info{
-
- 	background: white;
- 	color:black;
- 	border: 1px solid #E8E8E8 ;
- 	  -moz-box-shadow:    1px 1px 1px 1px #ccc;
-  -webkit-box-shadow: 1px 1px 1px 1px #ccc;
-  box-shadow:         1px 1px 1px 1px #ccc;
-
- }
-
- .btn-info:hover{
- 	background-color: #E8E8E8;
- 	border:none;
- 	color:black; 
- };
-
-.form-control::-moz-placeholder {
-  font-family: 'Nobile';
-}
-.form-control:-ms-input-placeholder {
-  font-family: 'Nobile';
-}
-.form-control::-webkit-input-placeholder {
-  font-family: 'Nobile';
-}
 
 @media only screen and (max-width: 40em) { 
 
@@ -421,5 +420,7 @@ h2{
 
 		margin-left: 0;
 	}
+
+
 
 }
