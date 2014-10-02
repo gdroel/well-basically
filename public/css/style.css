@@ -273,6 +273,12 @@ hr{
 	height: 400px;
 }
 
+.bottom{
+
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
 .list-group-item{
 
 

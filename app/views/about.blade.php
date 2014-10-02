@@ -14,7 +14,7 @@
 		<a class="btn btn-default">Sweet, Let's get Started!</a>
 		</div>
 	</div>
-	<div class="col-md-10 col-md-offset-1 movedown70">
+	<div class="col-md-10 col-md-offset-1 bottom">
 		<img  class="img-responsive" src="../images/screenshot.png">
 	</div>
 </div>
