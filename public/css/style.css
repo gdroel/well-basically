@@ -25,28 +25,6 @@ html, body, #i, #map-canvas {
 	padding: 0; 
 }
 
-.footer{
-
-	background-color: white;
-}
-
-.jumbotron .white{
-
-	color: white;
-}
-
-#map-canvas {
-    display:block;
-    position:absolute;
-    height:auto;
-    bottom:0;
-    top:0;
-    left:0;
-    right:0;
-    margin-top:70px; /* Set margin to your navbar height */
-}
-
-
 
 /***********************/
 /***********************/
@@ -170,10 +148,23 @@ hr{
 /****   Main Body   ****/
 /***********************/
 /***********************/
+
+#map-canvas {
+    display:block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:0;
+    left:0;
+    right:0;
+    margin-top:70px; /* Set margin to your navbar height */
+}
+
+
 .bg1{
 
 	background-image: url('../images/bg2.jpg');
-	height: 600px;
+	height: 100%;
 	background-size: cover;
 }
 
@@ -213,9 +204,20 @@ hr{
 	text-align: center;
 }
 
+.jumbotron > p{
+
+	font-size: 20px;
+}
+
 .jumbotron .gray{
 
 	color: gray;
+}
+
+
+.jumbotron .white{
+
+	color: white;
 }
 
 .jumbotron .big-text{

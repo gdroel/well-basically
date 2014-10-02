@@ -12,8 +12,8 @@ class HomeController extends BaseController {
 
 		/* 
 		Sets the Well Variable to null, or to the current users well. Used
-		for populating the well modal (not model, I'm talking about the bootstrap component) 
-		with information 
+		for populating the well modal (not model, I'm talking about the 
+		bootstrap component) with information 
 		*/
 
 		if(Auth::check()){
