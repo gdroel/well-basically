@@ -43,18 +43,24 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		</tr>
 
 	</table>
+	<hr>
 	@if(Auth::check())
+	<h4>Leave a Comment</h4>
 		{{ Form::open(array('action'=>'HomeController@comment')) }}
-		{{ Form::text('body',null,array('class'=>'form-control')) }}
+		{{ Form::textarea('body',null,array('class'=>'form-control comment-textarea','rows'=>4)) }}
 		{{ Form::hidden('user_id', Auth::user()->id) }}
 		{{ Form::hidden('address_id',$well->id) }}
-		{{ Form::submit('Add Comment') }}
+		<br>
+		{{ Form::submit('Add Comment',array('class'=>'btn btn-default')) }} 
+		<p class="inline gray pull-right">  You are logged in as {{ Auth::user()->username }} </p>
 		{{ Form::close() }}
 	@endif
 
 	@foreach($well->comments as $comment)
-
+	<div class="comment">
+	<p class="gray">{{ $comment->user->username }}</p>
 	<p>{{ $comment->body }}</p>
+	</div>
 	@endforeach
 	</div>
 	<div class="col-md-6 ">

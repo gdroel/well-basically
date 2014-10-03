@@ -6,4 +6,9 @@ class Comment extends Eloquent{
 
 		return $this->belongsTo('Address');
 	}
+
+	public function user(){
+
+		return $this->belongsTo('User');
+	}
 }

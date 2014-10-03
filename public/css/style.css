@@ -38,6 +38,11 @@ html, body, #i, #map-canvas {
 	margin: 0 auto;
 }
 
+.inline{
+
+	display: inline;
+}
+
 /***********************/
 /***********************/
 /***  Text & Buttons  **/
@@ -58,6 +63,11 @@ h1{
 h2{
 
 	font-family: 'Lato';
+}
+
+h3{
+
+	font-family: 'Nobile';
 }
 
 h4{
@@ -278,11 +288,14 @@ td{
 	padding:20px;
 }
 
-.stat{
+.comment{
 
-	border: 1px solid gray;
-	padding: 20px;
-	border-radius: 100px;
+	border-top: 1px solid #428bca;
+	padding: 14px;
+	margin-top:10px;
+	-moz-box-shadow:    1px 1px 1px 1px #ccc;
+  	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
+  	box-shadow:         1px 1px 1px 1px #ccc;
 }
 
 
@@ -447,6 +460,11 @@ li:hover{
 	font-size: 13px;
 	font-weight: 300;
 	z-index: 100;
+}
+
+.comment-textarea{
+
+	height: 300px;
 }
 
 /***********************/
