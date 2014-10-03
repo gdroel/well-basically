@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('well/{id}','HomeController@showWell');
+
 Route::get('/create', array('before'=>'auth','uses'=>'HomeController@showCreate'));
 Route::post('/create','HomeController@doCreate');
 

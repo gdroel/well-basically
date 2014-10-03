@@ -5,6 +5,8 @@
  * Roeloffs, it is designed to 
  * make wellbasically.com look
  * pretty darn snazzy.
+ *
+ * Main: #428bca
  * 
  * @project   Well Basically
  * @author    Gabe Roeloffs
@@ -25,6 +27,16 @@ html, body, #i, #map-canvas {
 	padding: 0; 
 }
 
+#mini-map-canvas{
+
+	height: 500px;
+	width: 100%;
+}
+
+.img-responsive{
+
+	margin: 0 auto;
+}
 
 /***********************/
 /***********************/
@@ -76,6 +88,11 @@ hr{
 	line-height: 50%;
 }
 
+td{
+
+	font-size: 25px;
+}
+
 
 .pac-container,p,a,li,label{
 
@@ -97,6 +114,16 @@ hr{
 .white{
 
 	color:white;
+	text-align: center;
+}
+
+.gray{
+
+	color: gray;
+}
+
+.text-center{
+
 	text-align: center;
 }
 
@@ -198,6 +225,12 @@ hr{
 	background-size: cover;
 }
 
+.bg-blue{
+
+	background-color: #428bca;
+	color: white
+}
+
 .jumbotron{
 
 	background: none;
@@ -245,6 +278,13 @@ hr{
 	padding:20px;
 }
 
+.stat{
+
+	border: 1px solid gray;
+	padding: 20px;
+	border-radius: 100px;
+}
+
 
 /***********************/
 /***********************/
@@ -277,7 +317,6 @@ hr{
 
 	position: fixed;
 	bottom: 0;
-	width: 100%;
 }
 .list-group-item{
 

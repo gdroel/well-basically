@@ -38,6 +38,14 @@ class HomeController extends BaseController {
 		return View::make('index',compact('addresses','well'));
 	}
 
+	public function showWell($id){
+
+
+		$well = Address::where('id',$id)->first();
+
+		return View::make('show-well',compact('well'));
+	}
+
 	/**
 	 * Simply returns the the create view, with the well variable.
 	 * 
