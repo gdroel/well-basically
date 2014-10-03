@@ -38,6 +38,14 @@ class HomeController extends BaseController {
 		return View::make('index',compact('addresses','well'));
 	}
 
+	/**
+	 *
+	 *  Shows an individual well.
+	 *  @param $id gets ID of well we want to show from route
+	 * 	@return  View return the show well view
+	 * 	
+	 */
+
 	public function showWell($id){
 
 
@@ -323,5 +331,20 @@ class HomeController extends BaseController {
 
 		Session::Flash('message','Your account has been confirmed.');
         return Redirect::action('HomeController@index');
+    }
+
+    public function comment(){
+
+    	$address = Address::where('id',Input::get('address_id'))->first();
+
+    	$comment = new Comment();
+
+    	$comment->body = Input::get('body');
+    	$comment->user_id = Input::get('user_id');
+    	$comment->address_id = Input::get('address_id');
+
+    	$address->comments()->save($comment);
+
+    	return Redirect::back();
     }
 }

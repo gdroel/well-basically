@@ -43,6 +43,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		</tr>
 
 	</table>
+	@if(Auth::check())
+		{{ Form::open(array('action'=>'HomeController@comment')) }}
+		{{ Form::text('body',null,array('class'=>'form-control')) }}
+		{{ Form::hidden('user_id', Auth::user()->id) }}
+		{{ Form::hidden('address_id',$well->id) }}
+		{{ Form::submit('Add Comment') }}
+		{{ Form::close() }}
+	@endif
+
+	@foreach($well->comments as $comment)
+
+	<p>{{ $comment->body }}</p>
+	@endforeach
 	</div>
 	<div class="col-md-6 ">
 	<div id="mini-map-canvas"></div>

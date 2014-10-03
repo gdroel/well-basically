@@ -7,4 +7,9 @@ class Address extends Eloquent{
 
 		return $this->BelongsTo('User');
 	}
+
+	public function comments(){
+
+		return $this->hasMany('Comment');
+	}
 }
