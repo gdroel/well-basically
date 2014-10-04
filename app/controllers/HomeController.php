@@ -342,6 +342,7 @@ class HomeController extends BaseController {
     	$comment->body = Input::get('body');
     	$comment->user_id = Input::get('user_id');
     	$comment->address_id = Input::get('address_id');
+    	$comment->comment_parent = Input::get('comment_parent');
 
     	$address->comments()->save($comment);
 

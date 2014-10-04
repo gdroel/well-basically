@@ -10,6 +10,6 @@ class Address extends Eloquent{
 
 	public function comments(){
 
-		return $this->hasMany('Comment');
+		return $this->hasMany('Comment')->where('comment_parent',0);
 	}
 }

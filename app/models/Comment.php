@@ -11,4 +11,9 @@ class Comment extends Eloquent{
 
 		return $this->belongsTo('User');
 	}
+
+	public function replies(){
+
+		return $this->hasMany('Comment','comment_parent');
+	}
 }

@@ -50,6 +50,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		{{ Form::textarea('body',null,array('class'=>'form-control comment-textarea','rows'=>4)) }}
 		{{ Form::hidden('user_id', Auth::user()->id) }}
 		{{ Form::hidden('address_id',$well->id) }}
+		{{ Form::hidden('comment_parent',0)}}
 		<br>
 		{{ Form::submit('Add Comment',array('class'=>'btn btn-default')) }} 
 		<p class="inline gray pull-right">  You are logged in as {{ Auth::user()->username }} </p>
@@ -57,14 +58,38 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	@endif
 
 	@foreach($well->comments as $comment)
-	<div class="comment">
-	<p class="gray">{{ $comment->user->username }}</p>
-	<p>{{ $comment->body }}</p>
-	</div>
+		<div class="comment">
+			<p class="gray">{{ $comment->user->username }}</p>
+			<p>{{ $comment->body }}</p>
+			<a class="reply-button">Reply</a>
+		</div>
+		
+		{{ Form::open(array('action'=>'HomeController@comment','class'=>'form-reply')) }}
+		{{ Form::textarea('body',null,array('class'=>'form-control comment-textarea','rows'=>2)) }}
+		{{ Form::hidden('user_id', Auth::user()->id) }}
+		{{ Form::hidden('address_id',$well->id) }}
+		{{ Form::hidden('comment_parent',$comment->id) }}
+		<br>
+		{{ Form::submit('Add Comment',array('class'=>'btn btn-default')) }} 
+		{{ Form::close() }}
+		@foreach($comment->replies as $reply)
+			<div class="comment" style="margin-left:15px">
+				<p>{{$reply->body }}</p>
+			</div>
+		@endforeach
 	@endforeach
 	</div>
 	<div class="col-md-6 ">
 	<div id="mini-map-canvas"></div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+$('.form-reply').hide();
+    $('.reply-button').click(function(){
+        $(this).parent().next('.form-reply').show();
+    });
+
+})
+</script>
 @stop

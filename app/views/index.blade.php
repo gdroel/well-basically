@@ -119,7 +119,7 @@ var allmarkers = [];
 
     var t = well['updated_at'].split(/[- :]/);
     var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-
+    var url = "<?php echo URL::to('/') ?>"
     var date = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
     //shows data when clicked
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -136,7 +136,8 @@ var allmarkers = [];
             '<br> Drilled in: '+
             locations[i]['year_dug']+
             '<br> Post Updated On: '+
-            date+'</p>'
+            date+'</p>'+
+            "<p><a class='inline' href='"+url+"/well/"+well['id']+"'>Comment on This Well</a></p>"
             );
           infowindow.open(map, marker);
           map.setCenter(marker.getPosition());
