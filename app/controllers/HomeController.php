@@ -1,3 +1,4 @@
+
 <?php
 
 class HomeController extends BaseController {
@@ -107,7 +108,7 @@ class HomeController extends BaseController {
 			$address->user_id = Auth::user()->id;
 			$address->save();
 
-			return Redirect::to('HomeController@index');
+			return Redirect::action('HomeController@index');
 
 		}
 
@@ -335,11 +336,10 @@ class HomeController extends BaseController {
 
     public function comment(){
 
-    	$address = Address::where('id',Input::get('address_id'))->first();
-    	$user = DB::table('users')->where('id',Input::get('user_id'))->pluck('email');
+    	$address = Address::where('id',Input::get('address_id'))->first();	
     	$body = Input::get('body');
     	$address_id = Input::get('address_id');
-
+    	$user_name = DB::table('users')->where('id',Input::get('user_id'))->pluck('username');
     	$comment = new Comment();
 
     	$comment->body = Input::get('body');
@@ -350,10 +350,13 @@ class HomeController extends BaseController {
     	$address->comments()->save($comment);
 
     	
-        Mail::send('emails.comment', compact('body','address_id'), function($message) {
-$user = DB::table('users')->where('id',Input::get('user_id'))->pluck('email');
-	    $message->to($user,'joj')
-	        ->subject('Someone Commented on Your Well!');
+        Mail::send('emails.comment', compact('body','address_id','user_name'), function($message) {
+
+		$user_email = DB::table('users')->where('id',Input::get('user_id'))->pluck('email');
+		$user_name = DB::table('users')->where('id',Input::get('user_id'))->pluck('username');
+
+	    $message->to($user_email,'Well Basically')
+	        ->subject('User '.$user_name.' commented on Your Well!');
         });
         
        
