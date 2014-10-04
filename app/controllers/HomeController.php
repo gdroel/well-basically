@@ -362,4 +362,26 @@ class HomeController extends BaseController {
        
     	return Redirect::back();
     }
+
+    public function showFeedback(){
+
+    	return View::make('feedback');
+
+    }
+
+    public function doFeedback(){
+
+    	$body = Input::get('body');
+
+    	Mail::send('emails.feedback', compact('body'), function($message) {
+
+    	$subject = Input::get('subject');
+	    $message->to('gdroel@gmail.com','Well Basically')
+	        ->subject($subject);
+        });
+
+        Session::Flash('message','Thanks for leaving feedback!');
+
+        return Redirect::action('HomeController@index');
+    }
 }

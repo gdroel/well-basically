@@ -76,7 +76,7 @@ h4{
 	font-family: 'Nobile';
 }
 
-p,a{
+p{
 
 	font-size: 14px;
 }
@@ -106,7 +106,7 @@ td{
 }
 
 
-.pac-container,p,a,li,label{
+.pac-container,p,li,label{
 
 	font-family: 'Nobile', sans-serif;
 
@@ -142,6 +142,11 @@ td{
 .lobster{
 
 	font-family: 'Lobster';
+}
+
+.nobile{
+
+	font-family: 'Nobile';
 }
 
 #search{
@@ -200,6 +205,14 @@ td{
 /****   Main Body   ****/
 /***********************/
 /***********************/
+
+.banner{
+
+	background-color: #428bca;
+	padding:5px;
+	color: white;
+	top:50px;
+}
 
 #map-canvas {
     display:block;
@@ -325,6 +338,10 @@ td{
 /***********************/
 /***********************/
 
+.alert-warning{
+
+	margin-bottom: 5px;
+}
 .alert{
 
   -webkit-border-radius: 0px;
@@ -411,6 +428,11 @@ li:hover{
 .movedown{
 
 	margin-top: 100px;
+}
+
+.movedown20{
+
+	margin-top: 20px;
 }
 
 .movedown70{
