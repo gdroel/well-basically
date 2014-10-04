@@ -27,7 +27,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	<div class="col-md-6">
 	<br>
 	<p class="gray">{{ Str::upper($well->address) }}</p>
-	
+	<p><span class="glyphicon glyphicon-user gray"></span> {{ $well->user->username }}</p>
+	<p><span class="glyphicon glyphicon-time gray "></span> {{ $well->updated_at->format('g:ia M j') }}</p>
 	<table class="table">
 		<tr>
 			<td>Year Dug</td>
@@ -59,21 +60,27 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 	@foreach($well->comments as $comment)
 		<div class="comment">
-			<p class="gray">{{ $comment->user->username }}</p>
+			<p class="gray inline">{{ $comment->user->username }}</p><p class="gray inline pull-right">{{ $comment->updated_at->format('g:ia M j') }}</p>
 			<p>{{ $comment->body }}</p>
+		@if(Auth::check())
 			<a class="reply-button">Reply</a>
+		@endif
 		</div>
 		
-		{{ Form::open(array('action'=>'HomeController@comment','class'=>'form-reply')) }}
-		{{ Form::textarea('body',null,array('class'=>'form-control comment-textarea','rows'=>2)) }}
-		{{ Form::hidden('user_id', Auth::user()->id) }}
-		{{ Form::hidden('address_id',$well->id) }}
-		{{ Form::hidden('comment_parent',$comment->id) }}
-		<br>
-		{{ Form::submit('Add Comment',array('class'=>'btn btn-default')) }} 
-		{{ Form::close() }}
+		@if(Auth::check())
+			{{ Form::open(array('action'=>'HomeController@comment','class'=>'form-reply')) }}
+			{{ Form::textarea('body',null,array('class'=>'form-control comment-textarea','rows'=>2,'placeholer'=>'Leave a reply...')) }}
+			{{ Form::hidden('user_id', Auth::user()->id) }}
+			{{ Form::hidden('address_id',$well->id) }}
+			{{ Form::hidden('comment_parent',$comment->id) }}
+			<br>
+			{{ Form::submit('Add Comment',array('class'=>'btn btn-default')) }} 
+			{{ Form::close() }}
+		@endif
+
 		@foreach($comment->replies as $reply)
 			<div class="comment" style="margin-left:15px">
+				<p class="gray inline">{{ $reply->user->username }}</p><p class="gray inline pull-right">{{ $reply->updated_at->format('g:ia M j') }}</p>
 				<p>{{$reply->body }}</p>
 			</div>
 		@endforeach
@@ -87,7 +94,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $(document).ready(function(){
 $('.form-reply').hide();
     $('.reply-button').click(function(){
-        $(this).parent().next('.form-reply').show();
+        $(this).parent().next('.form-reply').toggle();
     });
 
 })

@@ -336,6 +336,9 @@ class HomeController extends BaseController {
     public function comment(){
 
     	$address = Address::where('id',Input::get('address_id'))->first();
+    	$user = DB::table('users')->where('id',Input::get('user_id'))->pluck('email');
+    	$body = Input::get('body');
+    	$address_id = Input::get('address_id');
 
     	$comment = new Comment();
 
@@ -346,6 +349,14 @@ class HomeController extends BaseController {
 
     	$address->comments()->save($comment);
 
+    	
+        Mail::send('emails.comment', compact('body','address_id'), function($message) {
+$user = DB::table('users')->where('id',Input::get('user_id'))->pluck('email');
+	    $message->to($user,'joj')
+	        ->subject('Someone Commented on Your Well!');
+        });
+        
+       
     	return Redirect::back();
     }
 }

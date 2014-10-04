@@ -40,7 +40,8 @@ html, body, #i, #map-canvas {
 
 .inline{
 
-	display: inline;
+	display: inline-block;
+ 
 }
 
 /***********************/
@@ -101,6 +102,7 @@ hr{
 td{
 
 	font-size: 25px;
+	font-family: 'Lato';
 }
 
 
@@ -178,6 +180,19 @@ td{
      border:1px solid white;
      color: black;
      font-size: 15px;
+}
+
+.reply-button{
+
+	cursor: pointer;
+}
+
+.reply-button:hover{
+
+	background-color: #428bca;
+	padding: 5px;
+	color:white;
+	text-decoration: none;
 }
 
 /***********************/
@@ -470,6 +485,11 @@ li:hover{
 .comment-textarea{
 
 	height: 300px;
+}
+
+.text-form{
+
+	height: 100px
 }
 
 /***********************/

@@ -12,4 +12,5 @@ class Address extends Eloquent{
 
 		return $this->hasMany('Comment')->where('comment_parent',0);
 	}
+
 }
