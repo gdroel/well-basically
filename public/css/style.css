@@ -160,9 +160,9 @@ td{
 
 .btn-info{
 
- 	background: white;
- 	color:black;
- 	border: 1px solid #E8E8E8 ;
+ 	background: none;
+ 	color:white;
+ 	border: 2px solid white ;
  	-moz-box-shadow:    1px 1px 1px 1px #ccc;
   	-webkit-box-shadow: 1px 1px 1px 1px #ccc;
   	box-shadow:         1px 1px 1px 1px #ccc;
@@ -228,7 +228,7 @@ td{
 
 .bg1{
 
-	background-image: url('../images/bg2.jpg');
+	background-color: #428bca;
 	height: 100%;
 	background-size: cover;
 }

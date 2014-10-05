@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>Well Basically | The Well Database</title>
+<title>Well Basically || The Well Database</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/style.css">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ action('HomeController@index') }}">Well Basically</a>
+      <a class="navbar-brand" href="{{ action('HomeController@index') }}">Wellsio</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

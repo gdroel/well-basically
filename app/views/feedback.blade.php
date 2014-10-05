@@ -4,7 +4,7 @@
 @section('content')
 
 @if(Auth::check())
-<div class="col-md-6 col-md-offset-3 movedown">
+<div class="col-md-6 col-md-offset-3 movedown70">
 	<h2>Leave Feedback</h2>
 	<hr>
 	{{ Form::open(array('action'=>'HomeController@doFeedback')) }}

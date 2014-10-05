@@ -11,7 +11,7 @@
 			Well Basically is a crowdsourced well database. Owners 
 			of wells add their stats, and others can view their stats. Its basically Zillow for wells.
 		</p>
-		<a class="btn btn-default" href="{{ action('HomeController@showRegister') }}">Sweet, Let's get Started!</a>
+		<a class="btn btn-info" href="{{ action('HomeController@showRegister') }}">Sweet, Let's get Started!</a>
 		</div>
 	</div>
 	<div class="col-md-10 col-md-offset-1 bottom">

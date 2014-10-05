@@ -22,7 +22,7 @@
 	{{ Form::label('password','Enter your password')}}
 	{{ Form::password('password',array('class'=>'form-control')) }}
 	<br>
-	{{ Form::submit('Login',array('class'=>'btn btn-info')) }}
+	{{ Form::submit('Login',array('class'=>'btn btn-default')) }}
 	{{ Form::close() }}
 	</div>
 </div>

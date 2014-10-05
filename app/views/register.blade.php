@@ -20,7 +20,7 @@
 	{{ Form::label('password','Choose a password')}}
 	{{ Form::password('password',array('class'=>'form-control')) }}
 	<br>
-	{{ Form::submit('Register',array('class'=>'btn btn-info')) }}
+	{{ Form::submit('Register',array('class'=>'btn btn-default')) }}
 	{{ Form::close() }}
 	</div>
 </div>
