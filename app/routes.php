@@ -29,7 +29,7 @@ Route::post('/login', array('as' => 'login', 'uses' => 'HomeController@doLogin')
 Route::post('/edit',array('before'=>'auth', 'uses'=> 'HomeController@doEdit'));
 Route::get('/logout',array('before'=>'auth', 'uses'=> 'HomeController@doLogout'));
 
-Route::get('/feedback', 'HomeController@showFeedback');
+Route::get('/feedback', array('before'=>'auth', 'uses'=>'HomeController@showFeedback'));
 Route::post('/feedback', 'HomeController@doFeedback');
 
 Route::get('/confirm/{confirmation_code}','HomeController@confirm');

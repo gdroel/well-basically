@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-xs-12 bg3">
-	<div class="col-md-4 col-md-offset-4 movedown">
+	<div class="col-md-4 col-md-offset-4 movedown login-box">
 	<h2>Login</h2>
 	<hr>
 	@if($errors->has())

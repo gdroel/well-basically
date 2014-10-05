@@ -81,6 +81,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 @yield('content')
-
+@if(!Request::is('/') || Request::is('about'))
+<div class="navbar-fixed-bottom footer">
+        <p class="navbar-text">&copy 2014 Well Basically</p>
+        <p class="navbar-text"><a class="white" href="{{ action('HomeController@showFeedback') }}">Leave Feedback</a></p>
+</div>
+@endif
 </body>
 </html>

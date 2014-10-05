@@ -242,7 +242,7 @@ td{
 
 .bg3{
 
-	background-image: url('../images/simple-water.jpg');
+	background-image: url('../images/white-water.jpg');
 	height: 100%;
 	background-size: cover;
 
@@ -304,6 +304,13 @@ td{
 	border-radius: 10px;
 }
 
+.login-box{
+
+	background: rgba(255,255,255,.8);
+	padding: 20px;
+	border-radius: 10px;
+}
+
 .modal-title{
 
 	padding-top: 10px;
@@ -329,6 +336,18 @@ td{
 .reply{
 
 	display: none;
+}
+
+.navbar-fixed-bottom{
+
+	padding: 0px !important;
+}
+
+.footer{
+
+	background-color: #428bca;
+	color: white;
+	padding: 10px;
 }
 
 
