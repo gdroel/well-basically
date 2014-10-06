@@ -285,7 +285,7 @@ class HomeController extends BaseController {
 
 			if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)) ){
 
-				Session::Flash('message','You have successfully logged in.');
+				Session::Flash('message','Welcome back!');
 				return Redirect::action('HomeController@index');
 			}
 

@@ -284,7 +284,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div class="col-sm-3 movedown70 scroll">
 <div class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  Well Basically is in Beta. Please excuse any bugs. <a href="{{ action('HomeController@showFeedback') }}" class="alert-link">Leave Feedback</a>
+  Wellsio is in Beta. Please excuse any bugs. <a href="{{ action('HomeController@showFeedback') }}" class="alert-link">Leave Feedback</a>
 </div>
 @if (Session::has('message'))
 <div class="alert alert-success alert-dismissible message"  id="success-alert" role="alert">

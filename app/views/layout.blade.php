@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>Well Basically || The Well Database</title>
+<title>Wellsio || The Crowdsourced Well Database</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/style.css">
@@ -65,6 +65,7 @@
 
             @if(Auth::check())
             <li><a href="{{ action('HomeController@showCreate') }}">My Well</a></li>
+            <li><a href="{{ action('HomeController@doLogout') }}">Logout</a></li>
             @else
             <li><a href="{{ URL::to('about') }}">About</a></li>
             <li><a href="{{ action('HomeController@showLogin') }}"id="login-link">Login</a></li>
@@ -83,7 +84,7 @@
 @yield('content')
 @if(!Request::is('/') || Request::is('about'))
 <div class="navbar-fixed-bottom footer">
-        <p class="navbar-text">&copy 2014 Well Basically</p>
+        <p class="navbar-text">&copy 2014 Wellsio</p>
         <p class="navbar-text"><a class="white" href="{{ action('HomeController@showFeedback') }}">Leave Feedback</a></p>
 </div>
 @endif
