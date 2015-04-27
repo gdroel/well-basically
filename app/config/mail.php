@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => 'mailgun',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => 'smtp.mailgun.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'gdroel@gmail.com', 'name' => 'Gabe'),
+	'from' => array('address' => 'postmaster@wellsio.com', 'name' => 'Wellsio Support'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'gdroel@gmail.com',
+	'username' => 'postmaster@wellsio.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'gabe1234',
+	'password' => '5991e7b14a4bbb4b632d34c6838f37b4',
 
 	/*
 	|--------------------------------------------------------------------------

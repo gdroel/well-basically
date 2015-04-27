@@ -15,8 +15,8 @@ return array(
 	*/
 
 	'mailgun' => array(
-		'domain' => '',
-		'secret' => '',
+		'domain' => 'wellsio.com',
+		'secret' => 'key-620a3517a19cf970bda0647eaafcd6d0',
 	),
 
 	'mandrill' => array(

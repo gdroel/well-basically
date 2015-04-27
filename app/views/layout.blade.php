@@ -4,12 +4,16 @@
 <head>
 <title>Wellsio || The Crowdsourced Well Database</title>
     <!-- Latest compiled and minified CSS -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Wellsio.com is a crowdsourced, comprehensive water wells database. It's like Zillow, but for wells.">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/style.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-<script src="../js/markerclusterer.js">
+<script src="../js/markerclusterer.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script type="text/javascript"

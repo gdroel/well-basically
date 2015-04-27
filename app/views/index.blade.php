@@ -210,10 +210,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       <div class="modal-footer">
       @if(!isset($well))
-      {{ Form::submit('Add Well',array('class'=>'btn btn-info')) }}
+      {{ Form::submit('Add Well',array('class'=>'btn btn-default')) }}
       @else
       {{ Form::hidden('well_id',$well->id) }}
-      {{ Form::submit('Edit Your Well',array('class'=>'btn btn-info')) }}
+      {{ Form::submit('Edit Your Well',array('class'=>'btn btn-default')) }}
       @endif
 
       {{ Form::close() }}
@@ -241,7 +241,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </div>
       <div class="modal-footer">
       <small class="pull-left"><a href="{{ action('RemindersController@getRemind') }}">Forgot Password?</a></small>
-      {{ Form::submit('Login',array('class'=>'btn btn-info')) }}
+      {{ Form::submit('Login',array('class'=>'btn btn-default')) }}
       {{ Form::close() }}
       </div>
     </div>
@@ -272,7 +272,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <br>
       </div>
       <div class="modal-footer">
-      {{ Form::submit('Register',array('class'=>'btn btn-info')) }}
+      {{ Form::submit('Register',array('class'=>'btn btn-default')) }}
       {{ Form::close() }}
       </div>
     </div>
@@ -300,9 +300,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <script type="text/javascript">
 $(document).ready(function(){
 
-$("#pac-input").hide();
-$(window).resize(function(){
-  if($(window).width() <= 640){
+  if($(window).width() <= 700){
 
       $("#pac-input").show();
       $("#search").hide();
@@ -311,6 +309,24 @@ $(window).resize(function(){
 
   else{
 
+      $("#pac-input").hide();
+      $('#search').show();
+
+
+  }
+
+
+$(window).resize(function(){
+  if($(window).width() <= 700){
+
+      $("#pac-input").show();
+      $("#search").hide();
+
+  }
+
+  else{
+
+      $("#pac-input").hide();
       $('#search').show();
 
 
