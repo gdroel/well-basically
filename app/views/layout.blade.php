@@ -16,13 +16,11 @@
 <script src="../js/markerclusterer.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoaSu9IZTRrCkY1tTnMibgHg-uwB8aduk">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXfReHSEFzgIcXyRiiEt6xynYheahal-s&callback=initMap"
+  type="text/javascript"></script>
 </script>
- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-
-
-  </head>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXfReHSEFzgIcXyRiiEt6xynYheahal-s&libraries=places"></script>
+</head>
 <body>
 <nav class="navbar navbar-fixed-top"  role="navigation">
   <div class="container-fluid">
@@ -88,7 +86,7 @@
 @yield('content')
 @if(!Request::is('/') || Request::is('about'))
 <div class="navbar-fixed-bottom footer">
-        <p class="navbar-text">&copy 2014 Wellsio</p>
+        <p class="navbar-text">&copy 2018 Wellsio</p>
         <p class="navbar-text"><a class="white" href="{{ action('HomeController@showFeedback') }}">Leave Feedback</a></p>
 </div>
 @endif

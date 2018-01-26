@@ -57,7 +57,7 @@ return array(
 			'host'      => '127.0.0.1',
 			'database'  => 'wellbasically',
 			'username'  => 'root',
-			'password'  => 'r13pomd45',
+			'password'  => 'Mysqlpassword!1',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

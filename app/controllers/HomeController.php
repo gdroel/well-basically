@@ -189,7 +189,7 @@ class HomeController extends BaseController {
 	public function doRegister(){
 
         $rules = [
-            'username' => 'required|min:6|max:15|unique:users',
+            'username' => 'required|min:3|max:20|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|max:20'
         ];
@@ -204,38 +204,17 @@ class HomeController extends BaseController {
         $validator = Validator::make($input, $rules);
 
         if($validator->fails()) {
-
             return Redirect::action('HomeController@showRegister')->withInput()->withErrors($validator);
         }
         
-
-        $confirmation_code = str_random(30);
-
        	$user = new User();
 
         $user->username = Input::get('username');
         $user->email = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
-        $user->confirmation_code = $confirmation_code;
+        $user->confirmation_code = "confirmationcode";
         
         $user->save();
-
-        /*
-        
-        Sends with the view emails.verify, which has a link with the confirmation code.
-        The user clicks the code, then, it redirects them to the confirm method. Also,
-        this code sends from gdroel@gmail.com, which needs to be changed to a corporate
-        account.
-
-         */
-        Mail::send('emails.verify', compact('confirmation_code'), function($message) {
-
-            $message->to(Input::get('email'), Input::get('username'))
-                ->subject('Verify your email address');
-        });
-
-        // Sets message session variable, which can be accessed in the index view.
-        Session::Flash('message','Thanks for registering! Check your email to verify your account.');
 
         return Redirect::action('HomeController@index');
     }
@@ -270,21 +249,16 @@ class HomeController extends BaseController {
 		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->fails()) {
-			
 			return Redirect::to('login')
 			->with('validation_failed', 1)
 			->withErrors($validator);
-	   	
-
 		}
 
 		else{
-
 			$email = Input::get('email');
 			$password = Input::get('password');
 
-			if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>1)) ){
-
+			if (Auth::attempt(array('email' => $email, 'password' => $password, 'confirmed'=>0)) ){
 				Session::Flash('message','Welcome back!');
 				return Redirect::action('HomeController@index');
 			}
@@ -349,16 +323,9 @@ class HomeController extends BaseController {
 
     	$address->comments()->save($comment);
 
-    	
-        Mail::send('emails.comment', compact('body','address_id','user_name'), function($message) {
-
 		$user_email = DB::table('users')->where('id',Input::get('user_id'))->pluck('email');
 		$user_name = DB::table('users')->where('id',Input::get('user_id'))->pluck('username');
 
-	    $message->to($user_email,'Well Basically')
-	        ->subject('User '.$user_name.' commented on Your Well!');
-        });
-        
        
     	return Redirect::back();
     }
