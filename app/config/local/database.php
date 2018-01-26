@@ -33,10 +33,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'homestead',
-			'username' => 'homestead',
-			'password' => 'secret',
+			'host'     => 'ec2-23-21-195-249.compute-1.amazonaws.com',
+			'database' => 'ddrgmkvlnqlf8b',
+			'username' => 'vpmzextyeryzhk',
+			'password' => '8036ee34177017831b598d097b947baa077831f0ad3f2f26f91699b807578c74',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
